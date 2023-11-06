@@ -4,8 +4,8 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:matrix_app_project/core/usecases/colors.dart';
 import 'package:matrix_app_project/features/presentaition/pages/add_post_page.dart';
 import 'package:matrix_app_project/features/presentaition/pages/feed_screen.dart';
-import 'package:matrix_app_project/features/presentaition/pages/logout_page.dart';
 import 'package:matrix_app_project/features/presentaition/pages/profile_page.dart';
+import 'package:matrix_app_project/features/presentaition/pages/search_page.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -25,7 +25,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   final List<Widget> _screens = <Widget>[
     const FeedScreen(),
-    const LogOutPage(),
+    const SearchScreen(),
     const AddPostScreen(),
      ProfilPage(uid: FirebaseAuth.instance.currentUser!.uid,),
   ];
@@ -38,7 +38,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       body: _screens.elementAt(_selectedIndex),
       
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10,),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 3,),
         child: GNav(
           backgroundColor: scffoldBackgroundClr,
           //color: scffoldBackgroundClr,
@@ -53,8 +53,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
               text: 'Home',
             ),
             GButton(
-              icon: Icons.logout,
-              text: 'LogOut',
+              icon: Icons.search,
+              text: 'Search',
             ),
             GButton(
               icon: Icons.add,

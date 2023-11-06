@@ -7,6 +7,7 @@ import 'package:matrix_app_project/core/usecases/constants.dart';
 import 'package:matrix_app_project/core/util/utils.dart';
 import 'package:matrix_app_project/features/data/data_sources/firestore_methodes.dart';
 import 'package:matrix_app_project/features/data/models/user.dart';
+import 'package:matrix_app_project/features/presentaition/pages/bottom_nav/bottom_nav.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/user_provider.dart';
 import 'package:matrix_app_project/features/presentaition/widgets/add_post_choose_area.dart';
 import 'package:matrix_app_project/features/presentaition/widgets/costum_appbar_widget.dart';
@@ -22,6 +23,7 @@ class AddPostScreen extends StatefulWidget {
 }
 
 class _AddPostScreenState extends State<AddPostScreen> {
+  //----------------------------this will refresh the null value because the refreshUser will refresh data
   @override
   void initState() {
     super.initState();
@@ -32,6 +34,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
     UserProvider _userProvider = Provider.of(context, listen: false);
     await _userProvider.refreshUser();
   }
+  //---------------------------------------------------------------------------------
 
   Uint8List? _file;
 
@@ -121,8 +124,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
   @override
   void dispose() {
-    _captionController.dispose();
     super.dispose();
+    _captionController.dispose();
   }
 
   @override
@@ -136,7 +139,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
             backgroundColor: scffoldBackgroundClr,
             appBar: const CostumAppBarWidget(
               title: 'Add your post',
-               leading: Image(image: AssetImage('asset/images/Main_logo.png')),
+              leading: Image(image: AssetImage('asset/images/Main_logo.png')),
             ),
             body: SingleChildScrollView(
               child: Column(
@@ -157,11 +160,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
             backgroundColor: scffoldBackgroundClr,
             appBar: const CostumAppBarWidget(
               title: 'Add your post',
-             
             ),
             body: SingleChildScrollView(
               child: Column(
-               
                 children: [
                   _isLoading
                       ? const LinearProgressIndicator()
@@ -185,6 +186,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   MyNormalButton(
                     onTap: () {
                       postImage(user.uid, user.username, user.photoUrl);
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => BottomNavBar(),
+                      ));
                     },
                     text: 'Upload',
                     size: 65,

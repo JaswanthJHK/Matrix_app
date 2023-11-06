@@ -6,6 +6,7 @@ import 'package:matrix_app_project/core/usecases/constants.dart';
 import 'package:matrix_app_project/core/util/utils.dart';
 import 'package:matrix_app_project/features/presentaition/widgets/costum_appbar_widget.dart';
 import 'package:matrix_app_project/features/presentaition/widgets/costum_button.dart';
+import 'package:matrix_app_project/features/presentaition/widgets/image_dialog.dart';
 
 class ProfilPage extends StatefulWidget {
   final String uid;
@@ -64,22 +65,38 @@ class _ProfilPageState extends State<ProfilPage> {
             backgroundColor: scffoldBackgroundClr,
             appBar: const CostumAppBarWidget(
               title: 'Profile',
-               leading: Image(image: AssetImage('asset/images/Main_logo.png')),
+              leading: Image(image: AssetImage('asset/images/Main_logo.png')),
+              showActionIcon: true,
             ),
             body: ListView(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(10),
                   child: Column(
                     children: [
                       Row(
                         children: [
-                          CircleAvatar(
-                            backgroundColor: greyDark,
-                            backgroundImage: NetworkImage(
-                              userData['photoUrl'],
+                          GestureDetector(
+                            onLongPress: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return ImageDialog(
+                                    imageUrl: userData['photoUrl'],
+                                  );
+                                },
+                              );
+                              Future.delayed(Duration(seconds: 2), () {
+                                Navigator.pop(context);
+                              });
+                            },
+                            child: CircleAvatar(
+                              backgroundColor: greyDark,
+                              backgroundImage: NetworkImage(
+                                userData['photoUrl'],
+                              ),
+                              radius: 60,
                             ),
-                            radius: 60,
                           ),
                           Expanded(
                             child: Padding(
@@ -95,9 +112,9 @@ class _ProfilPageState extends State<ProfilPage> {
                                     userData['username'],
                                     style: const TextStyle(
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 16),
+                                        fontSize: 18),
                                   ),
-                                  sizeTen,
+                                  sizeEight,
                                   Text(userData['about']),
                                   EditProfileButton(
                                       onTap: () {},
@@ -154,10 +171,11 @@ class _ProfilPageState extends State<ProfilPage> {
                         DocumentSnapshot snap =
                             (snapshot.data! as dynamic).docs[index];
                         return Image(
-                            image: NetworkImage(
-                                snap['postUrl'],),
-                                fit: BoxFit.cover,
-                                );
+                          image: NetworkImage(
+                            snap['postUrl'],
+                          ),
+                          fit: BoxFit.cover,
+                        );
                       },
                     );
                   },

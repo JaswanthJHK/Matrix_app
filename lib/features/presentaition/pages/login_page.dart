@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:matrix_app_project/core/usecases/colors.dart';
 import 'package:matrix_app_project/core/usecases/constants.dart';
 import 'package:matrix_app_project/core/util/utils.dart';
-import 'package:matrix_app_project/features/presentaition/pages/feed_screen.dart';
+import 'package:matrix_app_project/features/presentaition/pages/bottom_nav/bottom_nav.dart';
 import 'package:matrix_app_project/features/presentaition/pages/sign_in_page.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/login_auth_methods.dart';
 import 'package:matrix_app_project/features/presentaition/widgets/costum_button.dart';
@@ -92,7 +92,7 @@ class LoginPage extends StatelessWidget {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const FeedScreen(), // prevous homescreen
+                              builder: (context) => const BottomNavBar(), // prevous homescreen
                             ));
                       } else {
                         showSnackBarMethod(res, context);
@@ -120,8 +120,6 @@ class LoginPage extends StatelessWidget {
                             style: TextStyle(color: authScreenTextClr),
                           ),
                         ),
-
-                        // sign In button area
 
                         TextButton(
                           onPressed: () {

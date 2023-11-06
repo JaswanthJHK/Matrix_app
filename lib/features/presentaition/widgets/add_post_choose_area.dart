@@ -60,19 +60,19 @@ class AddPostScreenImageUpload extends StatelessWidget {
           border: Border.all(color: Colors.grey, width: 2.0),
           color: const Color.fromARGB(255, 164, 164, 164),
           borderRadius: BorderRadius.circular(8)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            "Add Image",
-            style: TextStyle(
-                color: Colors.grey[500],
-                fontSize: 18,
-                fontWeight: FontWeight.bold),
-          )
-        ],
-      ),
+      // child: Column(
+      //   mainAxisAlignment: MainAxisAlignment.end,
+      //   crossAxisAlignment: CrossAxisAlignment.center,
+      //   children: [
+      //     Text(
+      //       "Add Image",
+      //       style: TextStyle(
+      //           color: Colors.grey[500],
+      //           fontSize: 18,
+      //           fontWeight: FontWeight.bold),
+      //     )
+      //   ],
+      // ),
     );
   }
 }

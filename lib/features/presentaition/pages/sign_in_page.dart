@@ -48,20 +48,7 @@ class _SignInPageState extends State<SignInPage> {
             child: Center(
               child: Column(
                 children: [
-                  //logo Image
-
-                  // Image.asset(
-                  //   'asset/images/Main_logo.png',
-                  //   height: 150,
-                  // ),
-                  // // ),
-                  // // ),
-
-                  // const Text(
-                  //   "Create your account",
-                  //   style: TextStyle(color:authScreenTextClr, fontSize: 16),
-                  // ),
-
+                
                   sizeHundred,
 
                   //
