@@ -55,11 +55,18 @@ class _FeedScreenState extends State<FeedScreen> {
             }
            
             return ListView.builder(
-              itemCount: snapshot.data!.docs.length,
-              itemBuilder: (context, index) => PostCard(
-                snap: snapshot.data!.docs[index].data(),
-              ),
-            );
+  itemCount: snapshot.data?.docs.length ?? 0,
+  itemBuilder: (context, index) {
+    if (snapshot.data == null) {
+      return const SizedBox(); // Return an empty container if snapshot is null
+    }
+    final data = snapshot.data!.docs[index].data();
+    if (data == null) {
+      return const SizedBox(); // Return an empty container if data is null
+    }
+    return PostCard(snap: data);
+  },
+);
           },
         ));
   }

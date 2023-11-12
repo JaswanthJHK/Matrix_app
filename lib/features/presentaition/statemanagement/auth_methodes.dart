@@ -71,6 +71,7 @@ class AuthMethods extends ChangeNotifier {
       }
     } catch (err) {
       res = err.toString();
+      print(err.toString());
     }
     return res;
   }
@@ -79,5 +80,14 @@ class AuthMethods extends ChangeNotifier {
   void notifyListeners() {
     // TODO: implement notifyListeners
     super.notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    signInUserNameTextController.dispose();
+    signInPasswordController.dispose();
+    signInAboutController.dispose();
+    signInEmailTextController.dispose();
   }
 }

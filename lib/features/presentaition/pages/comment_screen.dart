@@ -38,20 +38,27 @@ class _CommentScreenState extends State<CommentScreen> {
             .collection('posts')
             .doc(widget.snap['postId'])
             .collection('comments')
-            .orderBy('timestamp',descending: true,)
+            .orderBy(
+              'timestamp',
+              descending: true,
+            )
             .snapshots(),
-         builder: (context,
-              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            return ListView.builder(
-              itemCount: snapshot.data!.docs.length,
-              itemBuilder: (context, index) => CommentCard(
-                snap: snapshot.data!.docs[index].data(),
-              ),
+        builder: (context,
+            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.data!.docs.isEmpty) {
+            return const Center(
+              child: Text('No comments',style: TextStyle(color: greyDark ,fontSize: 20,fontWeight: FontWeight.bold),),
+            );
+          }
+          return ListView.builder(
+            itemCount: snapshot.data!.docs.length,
+            itemBuilder: (context, index) => CommentCard(
+              snap: snapshot.data!.docs[index].data(),
+            ),
           );
         },
       ),

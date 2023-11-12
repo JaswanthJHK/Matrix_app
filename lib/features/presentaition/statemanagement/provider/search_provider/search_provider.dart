@@ -20,7 +20,7 @@ class SearchProvider extends ChangeNotifier {
 
   List<User> getSearchedList(String query) {
    // getAllUser();
-    log(".................................$allUser");
+   // log(".................................$allUser");
     searchedList.clear();
     searchedList = allUser
         .where((element) =>

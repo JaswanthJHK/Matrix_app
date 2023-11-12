@@ -1,5 +1,7 @@
 // ignore_for_file: unnecessary_nullable_for_final_variable_declarations
 
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -80,16 +82,19 @@ class _PostCardState extends State<PostCard> {
                     ),
                   ),
                 ),
-                widget.snap['uid'] == FirebaseAuth.instance.currentUser!.uid
+                widget.snap['uid'] == FirebaseAuth.instance.currentUser?.uid // null changed
                     ? IconButton(
                         onPressed: () {
                           showDialog(
                             context: context,
                             builder: (context) {
                               // POST EDIT DELETE SHOWDIALOG AREA ------------------------
-                              return PostDeleteAndEdit(
-                                widget: widget,
-                                postId: widget.snap['postId'],
+                              return BackdropFilter(
+                                 filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                                child: PostDeleteAndEdit(
+                                  widget: widget,
+                                  postId: widget.snap['postId'],
+                                ),
                               );
                             },
                           );

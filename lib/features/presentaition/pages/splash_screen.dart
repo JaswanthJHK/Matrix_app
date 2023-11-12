@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:matrix_app_project/core/usecases/colors.dart';
 import 'package:matrix_app_project/features/presentaition/pages/bottom_nav/bottom_nav.dart';
 import 'package:matrix_app_project/features/presentaition/pages/login_page.dart';
+import 'package:matrix_app_project/features/presentaition/pages/sign_in_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

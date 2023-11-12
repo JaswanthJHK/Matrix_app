@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,10 @@ class ProfilPage extends StatefulWidget {
 class _ProfilPageState extends State<ProfilPage> {
   var userData = {};
   int postLength = 0;
+  int followers = 0;
+  int following = 0;
   bool isLoading = false;
+  bool isFollowing = false;
 
   @override
   void initState() {
@@ -44,8 +49,12 @@ class _ProfilPageState extends State<ProfilPage> {
           .get();
 
       postLength = postSnap.docs.length;
-
       userData = userSnap.data()!;
+      followers = userSnap.data()!['followes'].length;
+      following = userSnap.data()!['following'].length;
+      isFollowing = userSnap
+          .data()![followers]
+          .contains(FirebaseAuth.instance.currentUser!.uid);
       setState(() {});
     } catch (e) {
       showSnackBarMethod(e.toString(), context);
@@ -81,8 +90,12 @@ class _ProfilPageState extends State<ProfilPage> {
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return ImageDialog(
-                                    imageUrl: userData['photoUrl'],
+                                  return BackdropFilter(
+                                    filter: ImageFilter.blur(
+                                        sigmaX: 9.0, sigmaY: 9.0),
+                                    child: ImageDialog(
+                                      imageUrl: userData['photoUrl'],
+                                    ),
                                   );
                                 },
                               );
@@ -116,10 +129,20 @@ class _ProfilPageState extends State<ProfilPage> {
                                   ),
                                   sizeEight,
                                   Text(userData['about']),
-                                  EditProfileButton(
+
+                                 FirebaseAuth.instance.currentUser!.uid == widget.uid? EditProfileButton(
                                       onTap: () {},
                                       text: 'Edit Profile',
-                                      size: 30)
+                                      size: 30,
+                                      ):isFollowing ? EditProfileButton(
+                                      onTap: () {},
+                                      text: 'Unfollow',
+                                      size: 30,
+                                      ): EditProfileButton(
+                                      onTap: () {},
+                                      text: 'Follow',
+                                      size: 30,
+                                      )
                                 ],
                               ),
                             ),
@@ -136,8 +159,8 @@ class _ProfilPageState extends State<ProfilPage> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               buildStatColumn(postLength, "Posts"),
-                              buildStatColumn(333, "Followers"),
-                              buildStatColumn(33, "Following"),
+                              buildStatColumn(followers, "Followers"),
+                              buildStatColumn(following, "Following"),
                             ],
                           ),
                         ),

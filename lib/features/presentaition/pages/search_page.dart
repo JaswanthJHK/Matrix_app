@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:matrix_app_project/core/usecases/colors.dart';
+import 'package:matrix_app_project/features/presentaition/pages/profile_page.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/search_provider/search_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -27,7 +28,6 @@ class SearchScreen extends StatelessWidget {
             onChanged: (value) {
               Provider.of<SearchProvider>(context, listen: false)
                   .getSearchedList(value);
-              log("tapped");
             },
           ),
         ),
@@ -59,13 +59,23 @@ class SearchScreen extends StatelessWidget {
             return ListView.builder(
               itemCount: value.searchedList.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: NetworkImage(
-                      value.searchedList[index].photoUrl,
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              ProfilPage(uid: value.searchedList[index].uid),
+                        ));
+                  },
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(
+                        value.searchedList[index].photoUrl,
+                      ),
                     ),
+                    title: Text(value.searchedList[index].username),
                   ),
-                  title: Text(value.searchedList[index].username),
                 );
               },
             );
@@ -92,8 +102,9 @@ class SearchScreen extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(12),
                       child: Image.network(
-                        
-                          (snapshot.data! as dynamic).docs[index]['postUrl'],fit: BoxFit.cover,),
+                        (snapshot.data! as dynamic).docs[index]['postUrl'],
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 );

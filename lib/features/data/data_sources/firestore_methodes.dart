@@ -71,8 +71,8 @@ class FirestoreMethodes {
     }
   }
 
-  Future<void> postComments(String postId, String text, String uid,
-      String name, String profilePic) async {
+  Future<void> postComments(String postId, String text, String uid, String name,
+      String profilePic) async {
     try {
       if (text.isNotEmpty) {
         String commentId = const Uuid().v1();
@@ -89,11 +89,7 @@ class FirestoreMethodes {
           'commentId': commentId,
           'timestamp': DateTime.now(),
         });
-      } else {
-        // ========================== add here something for handle no comment =========================
-
-        print('=========text is empty');
-      }
+      } else {}
     } catch (e) {
       print(
         e.toString(),
