@@ -8,25 +8,31 @@ class User {
   final String about;
   final List followers;
   final List following;
+  final DateTime lastActive;
+  final bool isOnline;
 
- const User(
-      {required this.email,
-      required this.uid,
-      required this.photoUrl,
-      required this.username,
-      required this.about,
-      required this.followers,
-      required this.following,
-      });
+  const User({
+    required this.email,
+    required this.uid,
+    required this.photoUrl,
+    required this.username,
+    required this.about,
+    required this.followers,
+    required this.following,
+    required this.lastActive,
+    this.isOnline = false,
+  });
 
   Map<String, dynamic> toJson() => {
         "username": username,
-        "about":about,
+        "about": about,
         "uid": uid,
         "email": email,
         "photoUrl": photoUrl,
         "followers": followers,
         "following": following,
+        "lastActive":lastActive,
+        "isOnline":isOnline,
       };
 
   static User fromsnap(DocumentSnapshot snap) {
@@ -40,6 +46,9 @@ class User {
       about: snaphsot['about'],
       followers: snaphsot['followers'],
       following: snaphsot['following'],
+     lastActive: (snaphsot['lastActive'] as Timestamp).toDate(),
+      isOnline: snaphsot['isOnline']?? false,
     );
   }
+  
 }

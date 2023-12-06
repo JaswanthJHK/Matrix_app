@@ -1,8 +1,11 @@
+import 'dart:ui';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:matrix_app_project/features/presentaition/pages/login_page.dart';
-import 'package:matrix_app_project/features/presentaition/widgets/costum_appbar_widget.dart';
-import 'package:matrix_app_project/features/presentaition/widgets/snackbar_widget.dart';
+import 'package:matrix_app_project/features/auth/login_page.dart';
+import 'package:matrix_app_project/features/presentaition/widgets/feature_widgets/logout_show_dialog.dart';
+import 'package:matrix_app_project/features/presentaition/widgets/global/costum_appbar_widget.dart';
+import 'package:matrix_app_project/features/presentaition/widgets/global/snackbar_widget.dart';
 
 class LogOutPage extends StatefulWidget {
   const LogOutPage({super.key});
@@ -25,14 +28,27 @@ class _HomeScreenState extends State<LogOutPage> {
             const Text("You Logged in successfully"),
             ElevatedButton(
                 onPressed: () {
-                  FirebaseAuth.instance.signOut().then((value) {
-                    warning(context, "You're logged out");
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginPage(),
-                        ));
-                  });
+                  // FirebaseAuth.instance.signOut().then((value) {
+                    
+                  //   warning(context, "You're logged out");
+                  //   Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //         builder: (context) => const LoginPage(),
+                  //       ));
+                  // });
+                       showDialog(
+                            context: context,
+                            builder: (context) {
+                              // POST EDIT DELETE SHOWDIALOG AREA ------------------------
+                              return BackdropFilter(
+                                filter:
+                                    ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                                child:const LogoutAlertDialog()
+                              );
+                            },
+                          );
+                  
                 },
                 child: const Text("Logout")),
           ],

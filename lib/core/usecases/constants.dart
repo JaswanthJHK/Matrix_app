@@ -27,3 +27,5 @@ const double profileHeight = 144;
 const top = coverHeigt - profileHeight / 2;
 
 const bottom = profileHeight / 2;
+
+const radiusThirty = Radius.circular(30);

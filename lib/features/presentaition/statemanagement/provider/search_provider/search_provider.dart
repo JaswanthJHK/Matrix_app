@@ -10,6 +10,7 @@ class SearchProvider extends ChangeNotifier {
   TextEditingController searchController = TextEditingController();
 
   getAllUser() async {
+    allUser.clear();
     QuerySnapshot allUserCollection =
         await FirebaseFirestore.instance.collection('users').get();
     List<DocumentSnapshot> userDocument = allUserCollection.docs;
@@ -19,13 +20,14 @@ class SearchProvider extends ChangeNotifier {
   }
 
   List<User> getSearchedList(String query) {
-   // getAllUser();
-   // log(".................................$allUser");
+    // getAllUser();
+    // log(".................................$allUser");
     searchedList.clear();
     searchedList = allUser
         .where((element) =>
             element.username.toLowerCase().contains(query.toLowerCase().trim()))
         .toList();
+    searchController.clear;
     notifyListeners();
     return searchedList;
   }

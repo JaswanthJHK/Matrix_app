@@ -3,10 +3,10 @@ import 'package:matrix_app_project/core/usecases/colors.dart';
 import 'package:matrix_app_project/core/usecases/constants.dart';
 import 'package:matrix_app_project/features/presentaition/pages/bottom_nav/bottom_nav.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/add_post/edit_post.dart';
-import 'package:matrix_app_project/features/presentaition/widgets/costum_appbar_widget.dart';
-import 'package:matrix_app_project/features/presentaition/widgets/costum_button.dart';
-import 'package:matrix_app_project/features/presentaition/widgets/post_card.dart';
-import 'package:matrix_app_project/features/presentaition/widgets/textfieled_widget.dart';
+import 'package:matrix_app_project/features/presentaition/widgets/global/costum_appbar_widget.dart';
+import 'package:matrix_app_project/features/presentaition/widgets/global/costum_button.dart';
+import 'package:matrix_app_project/features/presentaition/pages/home_main_section/widgets/post_card.dart';
+import 'package:matrix_app_project/features/presentaition/widgets/feature_widgets/textfieled_widget.dart';
 import 'package:provider/provider.dart';
 
 class EditPostPage extends StatelessWidget {

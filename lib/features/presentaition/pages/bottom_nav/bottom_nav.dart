@@ -2,10 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:matrix_app_project/core/usecases/colors.dart';
-import 'package:matrix_app_project/features/presentaition/pages/add_post_page.dart';
-import 'package:matrix_app_project/features/presentaition/pages/feed_screen.dart';
-import 'package:matrix_app_project/features/presentaition/pages/profile_page.dart';
-import 'package:matrix_app_project/features/presentaition/pages/search_page.dart';
+import 'package:matrix_app_project/features/presentaition/pages/add_post_section/screen/add_post_page.dart';
+import 'package:matrix_app_project/features/presentaition/pages/home_main_section/screen/feed_screen.dart';
+import 'package:matrix_app_project/features/presentaition/pages/chat_section/screen/message.dart';
+import 'package:matrix_app_project/features/presentaition/pages/profile_section/screen/profile_page.dart';
+import 'package:matrix_app_project/features/presentaition/pages/search_explore_section/screens/search_page.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -27,6 +28,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     const FeedScreen(),
     const SearchScreen(),
     const AddPostScreen(),
+    const MessagePage(),
      ProfilPage(uid: FirebaseAuth.instance.currentUser!.uid,),
   ];
 
@@ -38,7 +40,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       body: _screens.elementAt(_selectedIndex),
       
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 3,),
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3,),
         child: GNav(
           backgroundColor: scffoldBackgroundClr,
           //color: scffoldBackgroundClr,
@@ -59,6 +61,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
             GButton(
               icon: Icons.add,
               text: 'Add post',
+            ),
+             GButton(
+              icon: Icons.message_outlined,
+              text: 'Messeges',
             ),
             GButton(
               icon: Icons.person_2,

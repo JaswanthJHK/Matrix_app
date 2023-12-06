@@ -3,14 +3,17 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:matrix_app_project/features/data/data_sources/storage_methods.dart';
+import 'package:matrix_app_project/features/data/functions/storage_methods.dart';
 import 'package:matrix_app_project/features/data/models/user.dart' as model;
+import 'package:matrix_app_project/features/service/notification_service.dart';
 
 class AuthMethods extends ChangeNotifier {
   final signInPasswordController = TextEditingController();
   final signInAboutController = TextEditingController();
   final signInEmailTextController = TextEditingController();
   final signInUserNameTextController = TextEditingController();
+  // PUSH NOTIFICATION IS HERE
+  static final notification = NotificationService();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -55,6 +58,7 @@ class AuthMethods extends ChangeNotifier {
           photoUrl: photoUlr,
           following: [],
           followers: [],
+          lastActive: DateTime.now(),
         );
 
         await _firestore.collection('users').doc(cred.user!.uid).set(
@@ -62,6 +66,10 @@ class AuthMethods extends ChangeNotifier {
             );
         res = "Success";
       }
+      // PUSH NOTIFICATION REQPERMISSION AND GET TOKEN --------------
+
+      await notification.requestPermission();
+      await notification.getToken();
     } on FirebaseAuthException catch (err) {
       if (err.code == 'invalid-email') {
         // add here more exceptions
