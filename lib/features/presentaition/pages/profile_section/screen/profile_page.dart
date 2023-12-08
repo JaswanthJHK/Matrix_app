@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:matrix_app_project/core/usecases/colors.dart';
 import 'package:matrix_app_project/core/usecases/constants.dart';
+
+import 'package:matrix_app_project/features/presentaition/pages/profile_section/widgets/menu_items/navigation_drawer.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/user_data_provider/follow_user.dart';
 import 'package:matrix_app_project/features/presentaition/pages/profile_section/widgets/followers_list.dart';
 import 'package:matrix_app_project/features/presentaition/widgets/global/costum_appbar_widget.dart';
@@ -35,39 +37,7 @@ class _ProfilPageState extends State<ProfilPage> {
     getData();
   }
 
-  getData() async {
-    followers ??= 0;
-    following ??= 0;
-    setState(() {
-      isLoading = true;
-    });
-    try {
-      var userSnap = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(widget.uid)
-          .get();
-
-      // get post length
-      var postSnap = await FirebaseFirestore.instance
-          .collection('posts')
-          .where('uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-          .get();
-
-      postLength = postSnap.docs.length;
-      userData = userSnap.data()!;
-      followers = userSnap.data()!['followers'].length;
-      following = userSnap.data()!['following'].length;
-      isFollowing = userSnap
-          .data()![followers]
-          .contains(FirebaseAuth.instance.currentUser!.uid);
-      setState(() {});
-    } catch (e) {
-      // showSnackBarMethod(e.toString(), context);
-    }
-    setState(() {
-      isLoading = false;
-    });
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -77,11 +47,30 @@ class _ProfilPageState extends State<ProfilPage> {
           )
         : Scaffold(
             backgroundColor: scffoldBackgroundClr,
-            appBar: const CostumAppBarWidget(
+            appBar: 
+            const CostumAppBarWidget(
               title: 'Profile',
               leading: Image(image: AssetImage('asset/images/Main_logo.png')),
               showActionIcon: true,
             ),
+            drawer: DrawerMenu(),
+      //       AppBar(
+      //         backgroundColor: scffoldBackgroundClr,
+      //         elevation: 0,
+      //   title: Text(
+      //     'Profile',
+      //     style: TextStyle(
+      //         color: blackClr, fontSize: 25, fontWeight: FontWeight.bold),
+      //   ),
+      //   centerTitle: true,
+      //   actions: [
+      //     PopupMenuButton<MenuItem>(
+      //       itemBuilder: (context) => [
+      //         ...MenuItems.itemFirst.map(buildItem).toList(),
+      //       ],
+      //     )
+      //   ],
+      // ),
             body: ListView(
               children: [
                 Padding(
@@ -137,9 +126,7 @@ class _ProfilPageState extends State<ProfilPage> {
                                   FirebaseAuth.instance.currentUser!.uid ==
                                           widget.uid
                                       ? EditProfileButton(
-                                          onTap: () {
-                                           
-                                          },
+                                          onTap: () {},
                                           text: 'Edit Profile',
                                           size: 30,
                                         )
@@ -155,10 +142,11 @@ class _ProfilPageState extends State<ProfilPage> {
                                                             .uid,
                                                         followId:
                                                             userData['uid']);
-                                                  
+
                                                     setState(() {
                                                       isFollowing = false;
-                                                      //   followers--;
+                                                      followers =
+                                                          (followers! - 1);
                                                     });
                                                   },
                                                   text: 'Unfollow',
@@ -173,10 +161,11 @@ class _ProfilPageState extends State<ProfilPage> {
                                                             .uid,
                                                         followId:
                                                             userData['uid']);
-                                                   
+
                                                     setState(() {
                                                       isFollowing = true;
-                                                      //followers++;
+                                                      followers =
+                                                          (followers! + 1);
                                                     });
                                                   },
                                                   text: 'Follow',
@@ -200,23 +189,25 @@ class _ProfilPageState extends State<ProfilPage> {
                             children: [
                               buildStatColumn(postLength, "Posts"),
                               InkWell(
-                               onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => FollowersList(
-                                        name: "Followers",
-                                        followers: userData['followers']),
-                                  )),
-                                child: buildStatColumn(followers, "Followers")),
+                                  onTap: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => FollowersList(
+                                            name: "Followers",
+                                            followers: userData['followers']),
+                                      )),
+                                  child:
+                                      buildStatColumn(followers, "Followers")),
                               InkWell(
-                                 onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => FollowersList(
-                                        name: "Following",
-                                        followers: userData['following']),
-                                  )),
-                                child: buildStatColumn(following, "Following")),
+                                  onTap: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => FollowersList(
+                                            name: "Following",
+                                            followers: userData['following']),
+                                      )),
+                                  child:
+                                      buildStatColumn(following, "Following")),
                             ],
                           ),
                         ),
@@ -249,5 +240,38 @@ class _ProfilPageState extends State<ProfilPage> {
         )
       ],
     );
+  }
+  getData() async {
+    followers ??= 0;
+    following ??= 0;
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      var userSnap = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(widget.uid)
+          .get();
+
+      // get post length
+      var postSnap = await FirebaseFirestore.instance
+          .collection('posts')
+          .where('uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+          .get();
+
+      postLength = postSnap.docs.length;
+      userData = userSnap.data()!;
+      followers = userSnap.data()!['followers'].length;
+      following = userSnap.data()!['following'].length;
+      isFollowing = userSnap
+          .data()!['followers']
+          .contains(FirebaseAuth.instance.currentUser!.uid);
+      setState(() {});
+    } catch (e) {
+      // showSnackBarMethod(e.toString(), context);
+    }
+    setState(() {
+      isLoading = false;
+    });
   }
 }

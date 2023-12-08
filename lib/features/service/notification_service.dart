@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
@@ -60,12 +59,17 @@ class NotificationService {
     final notificationDetails =
         NotificationDetails(android: androidDetails, iOS: iosDetails);
 
-    await flutterLocalNotificationsPlugin.show(0, message.notification!.title,
-        message.notification!.body, notificationDetails,
-        payload: message.data['body']);
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      message.notification!.title,
+      message.notification!.body,
+      notificationDetails,
+      payload: message.data['body'],
+    );
   }
 
   Future<void> requestPermission() async {
+    // instance creation
     final messaging = FirebaseMessaging.instance;
 
     final settings = await messaging.requestPermission(
@@ -113,17 +117,20 @@ class NotificationService {
   void firebaseNotification(context) {
     _initLocalNotification();
 
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
-      await Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => ChatScreen(userId: message.data['senterId']),
-        ),
-      );
-    });
-    FirebaseMessaging.onMessage
-    .listen((RemoteMessage message) async {
-      await _showLocalNotification(message);
-    });
+    FirebaseMessaging.onMessageOpenedApp.listen(
+      (RemoteMessage message) async {
+        await Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (_) => ChatScreen(userId: message.data['senterId']),
+          ),
+        );
+      },
+    );
+    FirebaseMessaging.onMessage.listen(
+      (RemoteMessage message) async {
+        await _showLocalNotification(message);
+      },
+    );
   }
 
   Future<void> sendNotification(

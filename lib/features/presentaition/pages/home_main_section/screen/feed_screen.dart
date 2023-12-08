@@ -13,6 +13,7 @@ class FeedScreen extends StatefulWidget {
 }
 
 class _FeedScreenState extends State<FeedScreen> {
+  
   @override
   void initState() {
     super.initState();
@@ -20,21 +21,20 @@ class _FeedScreenState extends State<FeedScreen> {
   }
 
   // here we also added the refreshUser
-  addData() async {
+ Future<void> addData() async {
     UserProvider _userProvider = Provider.of(context, listen: false);
     await _userProvider.refreshUser();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
         backgroundColor: scffoldBackgroundClr,
-        appBar: const CostumAppBarWidget(
+        appBar: CostumAppBarWidget(
           title: 'MATRIX',
           leading: Image(image: AssetImage('asset/images/Main_logo.png')),
         ),
-        body: PostCardStream());
+        body: PostCardStream(),
+        );
   }
 }
-
-

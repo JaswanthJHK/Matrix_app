@@ -24,6 +24,11 @@ class ProfilePostGrid extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         }
+         if (snapshot.data == null) {
+          return const Center(
+            child: Text('No posts available.'),
+          );
+        }
         return GridView.builder(
           shrinkWrap: true,
           itemCount: (snapshot.data! as dynamic).docs.length,

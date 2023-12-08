@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:matrix_app_project/core/usecases/colors.dart';
 import 'package:matrix_app_project/features/presentaition/pages/profile_section/screen/profile_page.dart';
-import 'package:matrix_app_project/features/presentaition/pages/profile_section/screen/profile_page_two.dart';
 import 'package:matrix_app_project/features/presentaition/pages/search_explore_section/screens/explore_screen.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/search_provider/search_provider.dart';
 import 'package:provider/provider.dart';

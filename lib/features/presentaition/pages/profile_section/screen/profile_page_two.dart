@@ -1,29 +1,27 @@
 // import 'dart:ui';
+
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:flutter/material.dart';
 // import 'package:matrix_app_project/core/usecases/colors.dart';
 // import 'package:matrix_app_project/core/usecases/constants.dart';
-// import 'package:matrix_app_project/features/presentaition/pages/profile_section/widgets/image_dialog.dart';
-// import 'package:matrix_app_project/features/presentaition/pages/profile_section/widgets/profile_post_grid.dart';
 // import 'package:matrix_app_project/features/presentaition/statemanagement/provider/user_data_provider/follow_user.dart';
+// import 'package:matrix_app_project/features/presentaition/pages/profile_section/widgets/followers_list.dart';
 // import 'package:matrix_app_project/features/presentaition/widgets/global/costum_appbar_widget.dart';
 // import 'package:matrix_app_project/features/presentaition/widgets/global/costum_button.dart';
-// // import 'package:matrix_app_project/features/presentation/statemanagement/provider/user_data_provider/follow_user.dart';
-// // import 'package:matrix_app_project/features/presentation/widgets/global/costum_appbar_widget.dart';
-// // import 'package:matrix_app_project/features/presentation/widgets/global/costum_button.dart';
-// // import 'package:matrix_app_project/features/presentation/pages/profile_section/widgets/image_dialog.dart';
+// import 'package:matrix_app_project/features/presentaition/pages/profile_section/widgets/image_dialog.dart';
+// import 'package:matrix_app_project/features/presentaition/pages/profile_section/widgets/profile_post_grid.dart';
 // import 'package:provider/provider.dart';
 
-// class ProfilePageTwo extends StatefulWidget {
+// class ProfilPage extends StatefulWidget {
 //   final String uid;
-//   ProfilePageTwo({Key? key, required this.uid}) : super(key: key);
+//   ProfilPage({super.key, required this.uid});
 
 //   @override
-//   State<ProfilePageTwo> createState() => _ProfilPageState();
+//   State<ProfilPage> createState() => _ProfilPageState();
 // }
 
-// class _ProfilPageState extends State<ProfilePageTwo> {
+// class _ProfilPageState extends State<ProfilPage> {
 //   var userData = {};
 //   int postLength = 0;
 //   int? followers;
@@ -49,7 +47,7 @@
 //           .doc(widget.uid)
 //           .get();
 
-//       // Fetch post count
+//       // get post length
 //       var postSnap = await FirebaseFirestore.instance
 //           .collection('posts')
 //           .where('uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
@@ -60,27 +58,11 @@
 //       followers = userSnap.data()!['followers'].length;
 //       following = userSnap.data()!['following'].length;
 //       isFollowing = userSnap
-//           .data()!['followers']
+//           .data()![followers]
 //           .contains(FirebaseAuth.instance.currentUser!.uid);
 //       setState(() {});
-      
-//       // Listen to real-time updates
-//       FirebaseFirestore.instance
-//           .collection('users')
-//           .doc(widget.uid)
-//           .snapshots()
-//           .listen((event) {
-//         setState(() {
-//           followers = event.data()!['followers'].length;
-//           following = event.data()!['following'].length;
-//           isFollowing = event.data()!['followers'].contains(
-//             FirebaseAuth.instance.currentUser!.uid,
-//           );
-//         });
-//       });
-
 //     } catch (e) {
-//       // Handle errors
+//       // showSnackBarMethod(e.toString(), context);
 //     }
 //     setState(() {
 //       isLoading = false;
@@ -194,7 +176,7 @@
                                                    
 //                                                     setState(() {
 //                                                       isFollowing = true;
-//                                                       //followers++;
+//                                                       followers;
 //                                                     });
 //                                                   },
 //                                                   text: 'Follow',
@@ -207,47 +189,43 @@
 //                           )
 //                         ],
 //                       ),
-//                       // ... (Your existing code for displaying user details)
-
-//                       // Example of using StreamBuilder for real-time updates
-//                       StreamBuilder<DocumentSnapshot>(
-//                         stream: FirebaseFirestore.instance
-//                             .collection('users')
-//                             .doc(widget.uid)
-//                             .snapshots(),
-//                         builder: (context, snapshot) {
-//                           if (!snapshot.hasData) {
-//                             return CircularProgressIndicator();
-//                           }
-
-//                           // Access real-time data using snapshot
-//                           var updatedFollowers =
-//                               snapshot.data!['followers'].length;
-//                           var updatedFollowing =
-//                               snapshot.data!['following'].length;
-
-//                           return SizedBox(
-//                             width: double.infinity,
-//                             child: Padding(
-//                               padding: const EdgeInsets.only(left: 10),
-//                               child: Row(
-//                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                                 mainAxisSize: MainAxisSize.min,
-//                                 children: [
-//                                   buildStatColumn(postLength, "Posts"),
-//                                   buildStatColumn(updatedFollowers, "Followers"),
-//                                   buildStatColumn(updatedFollowing, "Following"),
-//                                 ],
-//                               ),
-//                             ),
-//                           );
-//                         },
-//                       ),
+//                       sizeTwentyFive,
+//                       SizedBox(
+//                         width: double.infinity,
+//                         child: Padding(
+//                           padding: const EdgeInsets.only(left: 10),
+//                           child: Row(
+//                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                             mainAxisSize: MainAxisSize.min,
+//                             children: [
+//                               buildStatColumn(postLength, "Posts"),
+//                               InkWell(
+//                                onTap: () => Navigator.push(
+//                                   context,
+//                                   MaterialPageRoute(
+//                                     builder: (context) => FollowersList(
+//                                         name: "Followers",
+//                                         followers: userData['followers']),
+//                                   )),
+//                                 child: buildStatColumn(followers, "Followers")),
+//                               InkWell(
+//                                  onTap: () => Navigator.push(
+//                                   context,
+//                                   MaterialPageRoute(
+//                                     builder: (context) => FollowersList(
+//                                         name: "Following",
+//                                         followers: userData['following']),
+//                                   )),
+//                                 child: buildStatColumn(following, "Following")),
+//                             ],
+//                           ),
+//                         ),
+//                       )
 //                     ],
 //                   ),
 //                 ),
 //                 const Divider(),
-//                  ProfilePostGrid(widget: widget as dynamic)
+//                 ProfilePostGrid(widget: widget)
 //               ],
 //             ),
 //           );

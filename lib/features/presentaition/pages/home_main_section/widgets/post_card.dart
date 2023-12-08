@@ -36,27 +36,6 @@ class _PostCardState extends State<PostCard> {
     getCommentLen();
   }
 
-  void getCommentLen() {
-  if (widget.snap == null) {
-    return; // Exit early if widget.snap is null
-  }
-
-  FirebaseFirestore.instance
-      .collection('posts')
-      .doc(widget.snap?['postId'])
-      .collection('comments')
-      .snapshots()
-      .listen((QuerySnapshot snap) {
-    commentLength = snap.docs.length;
-  
-    setState(() {});
-  }, onError: (e) {
-    showSnackBarMethod(e.toString(), context);
-  });
-}
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -166,11 +145,6 @@ class _PostCardState extends State<PostCard> {
                     duration: const Duration(milliseconds: 200),
                     opacity: isLikeAnimating ? 1 : 0,
                     child: LikeAnimation(
-                      child: const Icon(
-                        Icons.favorite,
-                        color: Colors.white,
-                        size: 110,
-                      ),
                       isAnimating: isLikeAnimating,
                       duration: const Duration(
                         milliseconds: 400,
@@ -180,6 +154,11 @@ class _PostCardState extends State<PostCard> {
                           isLikeAnimating = false;
                         });
                       },
+                      child:  const Icon(
+                        Icons.favorite,
+                        color: Colors.white,
+                        size: 110,
+                      ),
                     ),
                   )
                 ],
@@ -203,4 +182,23 @@ class _PostCardState extends State<PostCard> {
       ),
     );
   }
+  
+  void getCommentLen() {
+  if (widget.snap == null) {
+    return; // Exit early if widget.snap is null
+  }
+
+  FirebaseFirestore.instance
+      .collection('posts')
+      .doc(widget.snap?['postId'])
+      .collection('comments')
+      .snapshots()
+      .listen((QuerySnapshot snap) {
+    commentLength = snap.docs.length;
+  
+    setState(() {});
+  }, onError: (e) {
+    showSnackBarMethod(e.toString(), context);
+  });
+}
 }

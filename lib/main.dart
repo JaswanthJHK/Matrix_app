@@ -8,6 +8,7 @@ import 'package:matrix_app_project/features/presentaition/statemanagement/login_
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/add_post/edit_post.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/add_post/edit_profile.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/chat_provider/chat_provider.dart';
+import 'package:matrix_app_project/features/presentaition/statemanagement/provider/get_data/get_data.dart';
 // import 'package:matrix_app_project/features/presentaition/statemanagement/provider/comment_provider/comment_length_notifier.dart';
 // import 'package:matrix_app_project/features/presentaition/statemanagement/provider/comment_provider/comment_provider.dart';
 // import 'package:matrix_app_project/features/presentaition/statemanagement/provider/follow_unfollow_user/follow_unfollow_provider.dart';
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
           create: (context) => AuthMethods(),
         ),
         // ChangeNotifierProvider(
-        //   create: (context) => AddPost(), // we desable this in 19/10/23  for checking
+        //   create: (context) => ProfileDataProvider(), // we desable this in 19/10/23  for checking
         // ),
 
         ChangeNotifierProvider(

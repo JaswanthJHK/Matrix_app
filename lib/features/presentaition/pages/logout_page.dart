@@ -1,11 +1,8 @@
 import 'dart:ui';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:matrix_app_project/features/auth/login_page.dart';
 import 'package:matrix_app_project/features/presentaition/widgets/feature_widgets/logout_show_dialog.dart';
 import 'package:matrix_app_project/features/presentaition/widgets/global/costum_appbar_widget.dart';
-import 'package:matrix_app_project/features/presentaition/widgets/global/snackbar_widget.dart';
 
 class LogOutPage extends StatefulWidget {
   const LogOutPage({super.key});

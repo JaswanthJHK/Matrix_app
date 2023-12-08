@@ -42,68 +42,7 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     backgroundColor: scffoldBackgroundClr,
-  //     appBar: _buildAppBar(),
-  //     body: Padding(
-  //       padding: const EdgeInsets.all(12.0),
-  //       child: Column(
-  //         children: [
-  //           ChatMessages(
-  //             receiverId: widget.userId,
-  //           ),
-  //           ChatTextField(
-  //             recieverId: widget.userId,
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  // AppBar _buildAppBar() => AppBar(
-  //       elevation: 0,
-  //       foregroundColor: blackClr,
-  //       backgroundColor: Colors.transparent,
-  //       title: Consumer<FirebaseChatProvider>(
-  //         builder: (context, value, child) => value.user != null
-  //             ? Row(
-  //                 children: [
-  //                   CircleAvatar(
-  //                     backgroundImage: NetworkImage(value.user!.photoUrl),
-  //                     radius: 20,
-  //                   ),
-  //                   sizeTen,
-  //                   Padding(
-  //                     padding: const EdgeInsets.only(left: 10),
-  //                     child: Column(
-  //                       children: [
-  //                         Text(
-  //                           value.user!.username,
-  //                           style: const TextStyle(
-  //                               color: blackClr,
-  //                               fontSize: 20,
-  //                               fontWeight: FontWeight.bold),
-  //                         ),
-  //                         Text(
-  //                           value.user!.isOnline ? 'Online' : 'Offline',
-  //                           style: TextStyle(
-  //                             color: value.user!.isOnline
-  //                                 ? Colors.green
-  //                                 : greyLite,
-  //                             fontSize: 14,
-  //                           ),
-  //                         )
-  //                       ],
-  //                     ),
-  //                   )
-  //                 ],
-  //               )
-  //             : const SizedBox(),
-  //       ),
-  //     );
+ 
 
   AppBar _buildAppBar() => AppBar(
       elevation: 0,

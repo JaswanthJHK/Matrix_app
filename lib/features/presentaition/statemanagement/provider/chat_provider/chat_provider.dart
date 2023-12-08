@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:matrix_app_project/features/data/models/message_model.dart';
 import 'package:matrix_app_project/features/data/models/second_user_model.dart';
-import 'package:matrix_app_project/features/data/models/user.dart' as model;
 
 class FirebaseChatProvider extends ChangeNotifier {
   ScrollController scrollController = ScrollController();

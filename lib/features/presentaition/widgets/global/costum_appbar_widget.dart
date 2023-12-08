@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:matrix_app_project/core/usecases/colors.dart';
 import 'package:matrix_app_project/core/usecases/constants.dart';
 import 'package:matrix_app_project/features/data/models/user.dart';
-import 'package:matrix_app_project/features/presentaition/pages/logout_page.dart';
+
 
 class CostumAppBarWidget extends StatelessWidget
     implements PreferredSizeWidget {
@@ -50,7 +50,7 @@ class CostumAppBarWidget extends StatelessWidget
                 children: [
                   leading ??
                       Transform.translate(
-                        offset: Offset(1, 0),
+                        offset: const Offset(1, 0),
                         child: const BackButton(),
                       ),
                   if (showActionIcon)
@@ -58,11 +58,12 @@ class CostumAppBarWidget extends StatelessWidget
                       offset: const Offset(5, 0),
                       child: InkWell(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => LogOutPage(),
-                              ));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) =>HiddenDrawer(),
+                          //     ));
+                          Scaffold.of(context).openDrawer();
                         },
                         child: const Padding(
                           padding: EdgeInsets.all(10),
@@ -80,12 +81,12 @@ class CostumAppBarWidget extends StatelessWidget
   }
 
   @override
-  // TODO: implement preferredSize
+ 
   Size get preferredSize => const Size(double.maxFinite, 80);
 }
 
 class ChatAppBar extends StatelessWidget {
-  const ChatAppBar({super.key,required this.user});
+  const ChatAppBar({super.key, required this.user});
   final User user;
 
   @override
@@ -103,8 +104,11 @@ class ChatAppBar extends StatelessWidget {
           sizeTen,
           Column(
             children: [
-              Text(user.username,
-              style: TextStyle(color: blackClr,fontSize: 20,fontWeight: FontWeight.bold),)
+              Text(
+                user.username,
+                style: const TextStyle(
+                    color: blackClr, fontSize: 20, fontWeight: FontWeight.bold),
+              )
             ],
           )
         ],
@@ -112,3 +116,4 @@ class ChatAppBar extends StatelessWidget {
     );
   }
 }
+

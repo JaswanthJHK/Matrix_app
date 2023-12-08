@@ -5,19 +5,13 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:matrix_app_project/core/usecases/colors.dart';
 import 'package:matrix_app_project/core/usecases/constants.dart';
 import 'package:matrix_app_project/core/util/utils.dart';
 import 'package:matrix_app_project/features/data/functions/firestore_methodes.dart';
 import 'package:matrix_app_project/features/data/models/user.dart' as model;
-import 'package:matrix_app_project/features/presentaition/pages/profile_section/screen/profile_page.dart';
 import 'package:matrix_app_project/features/presentaition/pages/profile_section/widgets/profile_like_comment_description.dart';
-import 'package:matrix_app_project/features/presentaition/statemanagement/provider/comment_provider/comment_length_notifier.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/user_provider.dart';
-import 'package:matrix_app_project/features/presentaition/pages/comment_section/widgets/description_area.dart';
-import 'package:matrix_app_project/features/presentaition/pages/home_main_section/widgets/like_and_comment.dart';
 import 'package:matrix_app_project/features/presentaition/pages/home_main_section/widgets/like_animation.dart';
-import 'package:matrix_app_project/features/presentaition/pages/home_main_section/widgets/post_delete_edit_showdialog.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -161,11 +155,6 @@ class _PostCardState extends State<ProfilePostedCard> {
                     duration: const Duration(milliseconds: 200),
                     opacity: isLikeAnimating ? 1 : 0,
                     child: LikeAnimation(
-                      child: const Icon(
-                        Icons.favorite,
-                        color: Colors.white,
-                        size: 110,
-                      ),
                       isAnimating: isLikeAnimating,
                       duration: const Duration(
                         milliseconds: 400,
@@ -175,6 +164,11 @@ class _PostCardState extends State<ProfilePostedCard> {
                           isLikeAnimating = false;
                         });
                       },
+                      child:  const Icon(
+                        Icons.favorite,
+                        color: Colors.white,
+                        size: 110,
+                      ),
                     ),
                   )
                 ],

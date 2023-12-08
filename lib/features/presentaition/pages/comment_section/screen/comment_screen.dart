@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:matrix_app_project/core/usecases/colors.dart';
 import 'package:matrix_app_project/features/data/functions/firestore_methodes.dart';
 import 'package:matrix_app_project/features/data/models/user.dart';
+import 'package:matrix_app_project/features/presentaition/pages/comment_section/widgets/comment_srtreambuilder.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/user_provider.dart';
 import 'package:matrix_app_project/features/presentaition/pages/comment_section/widgets/comment_card.dart';
 import 'package:matrix_app_project/features/presentaition/widgets/global/costum_appbar_widget.dart';
@@ -33,39 +34,7 @@ class _CommentScreenState extends State<CommentScreen> {
       appBar: const CostumAppBarWidget(
         title: 'Comments',
       ),
-      body: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('posts')
-            .doc(widget.snap['postId'])
-            .collection('comments')
-            .orderBy(
-              'timestamp',
-              descending: true,
-            )
-            .snapshots(),
-        builder: (context,
-            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (snapshot.data!.docs.isEmpty) {
-            return const Center(
-              child: Text(
-                'No comments',
-                style: TextStyle(
-                    color: greyDark, fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            );
-          }
-          return ListView.builder(
-            itemCount: snapshot.data!.docs.length,
-            itemBuilder: (context, index) => CommentCard(
-              snap: snapshot.data!.docs[index].data(),
-            ),
-          );
-        },
-      ),
+      body: CommentStreambuilder(widget: widget),
       bottomNavigationBar: SafeArea(
         child: Container(
           color: Colors.grey[200],
@@ -124,3 +93,5 @@ class _CommentScreenState extends State<CommentScreen> {
     );
   }
 }
+
+

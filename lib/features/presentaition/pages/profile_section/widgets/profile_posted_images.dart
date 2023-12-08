@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:matrix_app_project/core/usecases/colors.dart';
-import 'package:matrix_app_project/features/presentaition/pages/home_main_section/widgets/post_card.dart';
 import 'package:matrix_app_project/features/presentaition/pages/profile_section/screen/profile_page.dart';
 import 'package:matrix_app_project/features/presentaition/pages/profile_section/widgets/profile_posted_images_card.dart';
 import 'package:matrix_app_project/features/presentaition/widgets/global/costum_appbar_widget.dart';

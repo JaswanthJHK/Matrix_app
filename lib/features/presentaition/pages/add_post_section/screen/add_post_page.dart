@@ -41,39 +41,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
   TextEditingController _captionController = TextEditingController();
   bool _isLoading = false;
 
-  postImage(
-    String uid,
-    String username,
-    String profImage,
-  ) async {
-    setState(() {
-      _isLoading = true;
-    });
-    try {
-      String res = await FirestoreMethodes().postUpload(
-        _captionController.text,
-        _file!,
-        uid,
-        username,
-        profImage,
-        
-      );
-      if (res == 'success') {
-        setState(() {
-          _isLoading = false;
-        });
-        showSnackBarMethod('Posted!', context);
-        clearImage();
-      } else {
-        setState(() {
-          _isLoading = false;
-        });
-        showSnackBarMethod(res, context);
-      }
-    } catch (e) {
-      showSnackBarMethod(e.toString(), context);
-    }
-  }
+ 
 
   selectImage(BuildContext context) async {
     return showDialog(
@@ -188,7 +156,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                     onTap: () {
                       postImage(user!.uid, user.username, user.photoUrl);
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => BottomNavBar(),
+                        builder: (context) => const BottomNavBar(),
                       ));
                     },
                     text: 'Upload',
@@ -198,5 +166,38 @@ class _AddPostScreenState extends State<AddPostScreen> {
               ),
             ),
           );
+  }
+   postImage(
+    String uid,
+    String username,
+    String profImage,
+  ) async {
+    setState(() {
+      _isLoading = true;
+    });
+    try {
+      String res = await FirestoreMethodes().postUpload(
+        _captionController.text,
+        _file!,
+        uid,
+        username,
+        profImage,
+        
+      );
+      if (res == 'success') {
+        setState(() {
+          _isLoading = false;
+        });
+        showSnackBarMethod('Posted!', context);
+        clearImage();
+      } else {
+        setState(() {
+          _isLoading = false;
+        });
+        showSnackBarMethod(res, context);
+      }
+    } catch (e) {
+      showSnackBarMethod(e.toString(), context);
+    }
   }
 }
