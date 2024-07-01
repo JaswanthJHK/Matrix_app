@@ -15,7 +15,7 @@ class _CommentCardState extends State<CommentCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 18, horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
       child: InkWell(
         onTap: () {
           Navigator.push(
@@ -42,11 +42,11 @@ class _CommentCardState extends State<CommentCard> {
                     text: TextSpan(children: [
                       TextSpan(
                           text: widget.snap['name'],
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontWeight: FontWeight.bold, color: blackClr)),
                       TextSpan(
                           text: '  ${widget.snap['text']}',
-                          style: TextStyle(color: blackClr))
+                          style: const TextStyle(color: blackClr))
                     ]),
                   ),
                   Padding(
@@ -55,7 +55,7 @@ class _CommentCardState extends State<CommentCard> {
                       DateFormat.yMMMd()
                           .format(widget.snap['timestamp'].toDate()),
                       style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                          const TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
                     ),
                   )
                 ],

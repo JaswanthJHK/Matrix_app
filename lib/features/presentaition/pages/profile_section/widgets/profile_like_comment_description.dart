@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 import 'package:matrix_app_project/features/data/models/user.dart';
 import 'package:matrix_app_project/features/presentaition/pages/comment_section/screen/comment_screen.dart';
 import 'package:matrix_app_project/features/presentaition/pages/home_main_section/widgets/like_animation.dart';
-import 'package:matrix_app_project/features/presentaition/pages/home_main_section/widgets/post_card.dart';
 import 'package:matrix_app_project/features/presentaition/pages/profile_section/widgets/profile_posted_images_card.dart';
 
 class LikeAndCommentWidget extends StatelessWidget {
@@ -58,10 +57,10 @@ class LikeAndCommentWidget extends StatelessWidget {
 
 class DescriptionAreaWidget extends StatelessWidget {
   const DescriptionAreaWidget({
-    Key? key,
+    super.key,
     required this.widget,
     required this.commentLength,
-  }) : super(key: key);
+  });
 
   final ProfilePostedCard widget;
   final int commentLength;
@@ -121,10 +120,10 @@ class DescriptionAreaWidget extends StatelessWidget {
             child: Visibility(
               visible: commentLength > 0,
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 4),
+                padding: const EdgeInsets.symmetric(vertical: 4),
                 child: Text(
                   'View all $commentLength comments',
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                  style: const TextStyle(fontSize: 16, color: Colors.grey),
                 ),
               ),
             ),

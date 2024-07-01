@@ -24,7 +24,7 @@ class PostCardStream extends StatelessWidget {
           );
         }
         if (!snapshot.hasData) {
-          return Text('No data');
+          return const Text('No data');
         }
        
         return ListView.builder(

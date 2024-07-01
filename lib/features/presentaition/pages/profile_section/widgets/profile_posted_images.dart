@@ -14,32 +14,7 @@ class ProfilePostedImages extends StatelessWidget {
   final ProfilPage widget;
 
   @override
-  // Widget build(BuildContext context) {
-  //   return FutureBuilder(
-  //     future: FirebaseFirestore.instance
-  //         .collection('posts')
-  //         .where('uid', isEqualTo: widget.uid)
-  //         .get(),
-  //     builder: (context, snapshot) {
-  //       if (snapshot.connectionState == ConnectionState.waiting) {
-  //         return const Center(
-  //           child: CircularProgressIndicator(),
-  //         );
-  //       }
-  //     return ListView.builder(
-  //         shrinkWrap: true,
-  //         itemCount: (snapshot.data! as dynamic).docs.length,
-       
-  //         itemBuilder: (context, index) {
-  //           DocumentSnapshot snap = (snapshot.data! as dynamic).docs[index];
-  //           return PostCard(
-  //             snap: snap,
-  //           );
-  //         },
-  //       );
-  //     },
-  //   );
-  // }
+ 
    Widget build(BuildContext context) {
     return Scaffold(
        backgroundColor: scffoldBackgroundClr,

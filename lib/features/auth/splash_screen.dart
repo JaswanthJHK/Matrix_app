@@ -4,7 +4,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:matrix_app_project/core/usecases/colors.dart';
-import 'package:matrix_app_project/features/auth/sign_in_page.dart';
 import 'package:matrix_app_project/features/presentaition/pages/bottom_nav/bottom_nav.dart';
 import 'package:matrix_app_project/features/auth/login_page.dart';
 

@@ -13,7 +13,7 @@ class LikeAndComment extends StatelessWidget {
   });
 
   final PostCard widget;
-  final User user;
+  final User? user;                                              // before here there is no null aware    01/7/2024
   
 
   @override
@@ -21,17 +21,17 @@ class LikeAndComment extends StatelessWidget {
     return Row(
       children: [
         LikeAnimation(
-          isAnimating: widget.snap['likes'].contains(user.uid),
+          isAnimating: widget.snap['likes'].contains(user?.uid), // added null aware   01/7/2024
           smallLike: true,
           child: IconButton(
               onPressed: () async {
                 await FirestoreMethodes().likePost(
                   widget.snap['postId'],
-                  user.uid,
+                  user?.uid as String,                           // here added null aware and type casitng  01/7/2024
                   widget.snap['likes'],
                 );
               },
-              icon: widget.snap['likes'].contains(user.uid)
+              icon: widget.snap['likes'].contains(user?.uid)     // added null aware   01/7/2024
                   ? const Icon(
                       Icons.favorite,
                       color: Colors.red,

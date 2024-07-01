@@ -5,8 +5,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:matrix_app_project/core/usecases/colors.dart';
 import 'package:matrix_app_project/core/usecases/constants.dart';
+import 'package:matrix_app_project/features/presentaition/pages/profile_section/screen/edit_profile.dart';
 
 import 'package:matrix_app_project/features/presentaition/pages/profile_section/widgets/menu_items/navigation_drawer.dart';
+import 'package:matrix_app_project/features/presentaition/statemanagement/provider/edit_profile/edit_profile.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/user_data_provider/follow_user.dart';
 import 'package:matrix_app_project/features/presentaition/pages/profile_section/widgets/followers_list.dart';
 import 'package:matrix_app_project/features/presentaition/widgets/global/costum_appbar_widget.dart';
@@ -37,8 +39,6 @@ class _ProfilPageState extends State<ProfilPage> {
     getData();
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return isLoading
@@ -47,136 +47,155 @@ class _ProfilPageState extends State<ProfilPage> {
           )
         : Scaffold(
             backgroundColor: scffoldBackgroundClr,
-            appBar: 
-            const CostumAppBarWidget(
+            appBar: const CostumAppBarWidget(
               title: 'Profile',
               leading: Image(image: AssetImage('asset/images/Main_logo.png')),
               showActionIcon: true,
             ),
             drawer: DrawerMenu(),
-      //       AppBar(
-      //         backgroundColor: scffoldBackgroundClr,
-      //         elevation: 0,
-      //   title: Text(
-      //     'Profile',
-      //     style: TextStyle(
-      //         color: blackClr, fontSize: 25, fontWeight: FontWeight.bold),
-      //   ),
-      //   centerTitle: true,
-      //   actions: [
-      //     PopupMenuButton<MenuItem>(
-      //       itemBuilder: (context) => [
-      //         ...MenuItems.itemFirst.map(buildItem).toList(),
-      //       ],
-      //     )
-      //   ],
-      // ),
+            //       AppBar(
+            //         backgroundColor: scffoldBackgroundClr,
+            //         elevation: 0,
+            //   title: Text(
+            //     'Profile',
+            //     style: TextStyle(
+            //         color: blackClr, fontSize: 25, fontWeight: FontWeight.bold),
+            //   ),
+            //   centerTitle: true,
+            //   actions: [
+            //     PopupMenuButton<MenuItem>(
+            //       itemBuilder: (context) => [
+            //         ...MenuItems.itemFirst.map(buildItem).toList(),
+            //       ],
+            //     )
+            //   ],
+            // ),
             body: ListView(
               children: [
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: Column(
                     children: [
-                      Row(
-                        children: [
-                          GestureDetector(
-                            onLongPress: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return BackdropFilter(
-                                    filter: ImageFilter.blur(
-                                        sigmaX: 9.0, sigmaY: 9.0),
-                                    child: ImageDialog(
-                                      imageUrl: userData['photoUrl'],
-                                    ),
+                      Consumer<EditProfileProvider>(
+                        builder: (context, value, child) {
+                          return Row(
+                            children: [
+                              GestureDetector(
+                                onLongPress: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return BackdropFilter(
+                                        filter: ImageFilter.blur(
+                                            sigmaX: 9.0, sigmaY: 9.0),
+                                        child: ImageDialog(
+                                          imageUrl: userData['photoUrl'],
+                                        ),
+                                      );
+                                    },
                                   );
+                                  Future.delayed(Duration(seconds: 2), () {
+                                    Navigator.pop(context);
+                                  });
                                 },
-                              );
-                              Future.delayed(Duration(seconds: 2), () {
-                                Navigator.pop(context);
-                              });
-                            },
-                            child: CircleAvatar(
-                              backgroundColor: greyDark,
-                              backgroundImage: NetworkImage(
-                                userData['photoUrl'],
-                              ),
-                              radius: 60,
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  sizeTen,
-                                  Text(
-                                    userData['username'],
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 18),
+                                child: CircleAvatar(
+                                  backgroundColor: greyDark,
+                                  backgroundImage: NetworkImage(
+                                    userData['photoUrl'],
                                   ),
-                                  sizeEight,
-                                  Text(userData['about']),
-                                  FirebaseAuth.instance.currentUser!.uid ==
-                                          widget.uid
-                                      ? EditProfileButton(
-                                          onTap: () {},
-                                          text: 'Edit Profile',
-                                          size: 30,
-                                        )
-                                      : Consumer<UserDataProvider>(builder:
-                                          (context, followValue, child) {
-                                          return isFollowing
-                                              ? EditProfileButton(
-                                                  onTap: () async {
-                                                    followValue.followUsers(
-                                                        uid: FirebaseAuth
-                                                            .instance
-                                                            .currentUser!
-                                                            .uid,
-                                                        followId:
-                                                            userData['uid']);
-
-                                                    setState(() {
-                                                      isFollowing = false;
-                                                      followers =
-                                                          (followers! - 1);
-                                                    });
-                                                  },
-                                                  text: 'Unfollow',
-                                                  size: 30,
-                                                )
-                                              : EditProfileButton(
-                                                  onTap: () async {
-                                                    followValue.followUsers(
-                                                        uid: FirebaseAuth
-                                                            .instance
-                                                            .currentUser!
-                                                            .uid,
-                                                        followId:
-                                                            userData['uid']);
-
-                                                    setState(() {
-                                                      isFollowing = true;
-                                                      followers =
-                                                          (followers! + 1);
-                                                    });
-                                                  },
-                                                  text: 'Follow',
-                                                  size: 30,
-                                                );
-                                        })
-                                ],
+                                  radius: 60,
+                                ),
                               ),
-                            ),
-                          )
-                        ],
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      sizeTen,
+                                      Text(
+                                        userData['username'],
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 18),
+                                      ),
+                                      sizeEight,
+                                      Text(userData['about']),
+                                      FirebaseAuth.instance.currentUser!.uid ==
+                                              widget.uid
+                                          ? EditProfileButton(
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          ProfileEditPage(
+                                                              userId:
+                                                                  widget.uid),
+                                                    ));
+                                              },
+                                              text: 'Edit Profile',
+                                              size: 30,
+                                            )
+                                          : Consumer<UserDataProvider>(
+                                              builder: (context, followValue,
+                                                  child) {
+                                                return isFollowing
+                                                    ? EditProfileButton(
+                                                        onTap: () async {
+                                                          followValue.followUsers(
+                                                              uid: FirebaseAuth
+                                                                  .instance
+                                                                  .currentUser!
+                                                                  .uid,
+                                                              followId:
+                                                                  userData[
+                                                                      'uid']);
+
+                                                          setState(() {
+                                                            isFollowing = false;
+                                                            followers =
+                                                                (followers! -
+                                                                    1);
+                                                          });
+                                                        },
+                                                        text: 'Unfollow',
+                                                        size: 30,
+                                                      )
+                                                    : EditProfileButton(
+                                                        onTap: () async {
+                                                          followValue.followUsers(
+                                                              uid: FirebaseAuth
+                                                                  .instance
+                                                                  .currentUser!
+                                                                  .uid,
+                                                              followId:
+                                                                  userData[
+                                                                      'uid']);
+
+                                                          setState(() {
+                                                            isFollowing = true;
+                                                            followers =
+                                                                (followers! +
+                                                                    1);
+                                                          });
+                                                        },
+                                                        text: 'Follow',
+                                                        size: 30,
+                                                      );
+                                              },
+                                            )
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
+                          );
+                        },
                       ),
                       sizeTwentyFive,
                       SizedBox(
@@ -241,6 +260,7 @@ class _ProfilPageState extends State<ProfilPage> {
       ],
     );
   }
+
   getData() async {
     followers ??= 0;
     following ??= 0;

@@ -3,7 +3,6 @@ import 'package:matrix_app_project/core/usecases/colors.dart';
 import 'package:matrix_app_project/core/usecases/constants.dart';
 import 'package:matrix_app_project/features/data/models/user.dart';
 
-
 class CostumAppBarWidget extends StatelessWidget
     implements PreferredSizeWidget {
   final String title;
@@ -81,7 +80,6 @@ class CostumAppBarWidget extends StatelessWidget
   }
 
   @override
- 
   Size get preferredSize => const Size(double.maxFinite, 80);
 }
 
@@ -116,4 +114,3 @@ class ChatAppBar extends StatelessWidget {
     );
   }
 }
-

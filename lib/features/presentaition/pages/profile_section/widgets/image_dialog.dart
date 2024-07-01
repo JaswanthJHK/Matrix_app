@@ -19,7 +19,7 @@ class _ImageDialogState extends State<ImageDialog> {
         },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: Container(
+          child: SizedBox(
            
             height: 300,
             width: 300,

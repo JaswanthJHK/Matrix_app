@@ -170,7 +170,8 @@ class _PostCardState extends State<PostCard> {
       
           LikeAndComment(
             widget: widget,
-            user: user!,
+            user: user
+         //   user: user!                                        this was here before the normal user    01/7/2024
           ),
       
           // DESCRIPTION AND NUMBER OF COMMENT AND LIKES

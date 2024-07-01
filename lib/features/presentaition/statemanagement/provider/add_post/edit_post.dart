@@ -10,6 +10,7 @@ class EditPostProvider extends ChangeNotifier {
           .collection("posts")
           .doc(postId)
           .update({"description": newDescription});
+          
     } catch (e) {
       log("error ${e.toString()}");
     }

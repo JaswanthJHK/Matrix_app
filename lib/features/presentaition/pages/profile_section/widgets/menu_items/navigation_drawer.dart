@@ -12,7 +12,7 @@ class DrawerMenu extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: scffoldBackgroundClr,
               ),
               child:
@@ -25,22 +25,22 @@ class DrawerMenu extends StatelessWidget {
                   // ),
                   Image.asset('asset/images/Main_logo.png')),
           ListTile(
-            leading: Icon(Icons.policy),
-            title: Text('Privacy Policy'),
+            leading: const Icon(Icons.policy),
+            title: const Text('Privacy Policy'),
             onTap: () {
               showPrivacyDialog(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.info),
-            title: Text('About'),
+            leading: const Icon(Icons.info),
+            title: const Text('About'),
             onTap: () {
               showaboutDialog(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.logout),
-            title: Text('Logout'),
+            leading: const Icon(Icons.logout),
+            title: const Text('Logout'),
             onTap: () {
               // Show the logout confirmation dialog
               showLogoutDialog(context);
@@ -56,7 +56,7 @@ void showLogoutDialog(BuildContext context) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return LogoutAlertDialog();
+      return const LogoutAlertDialog();
     },
   );
 }
@@ -65,7 +65,7 @@ void showaboutDialog(BuildContext context) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return AboutDialogone();
+      return const AboutDialogone();
     },
   );
 }
@@ -73,6 +73,6 @@ void showaboutDialog(BuildContext context) {
 void showPrivacyDialog(BuildContext context) {
   showDialog(
     context: context,
-    builder: (context) => PrivacyPolicyDialog(),
+    builder: (context) => const PrivacyPolicyDialog(),
   );
 }

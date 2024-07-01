@@ -2,16 +2,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:matrix_app_project/features/auth/splash_screen.dart';
-// import 'package:matrix_app_project/features/data/functions/user_data/get_user_data.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/auth_methodes.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/login_auth_methods.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/add_post/edit_post.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/add_post/edit_profile.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/chat_provider/chat_provider.dart';
-import 'package:matrix_app_project/features/presentaition/statemanagement/provider/get_data/get_data.dart';
-// import 'package:matrix_app_project/features/presentaition/statemanagement/provider/comment_provider/comment_length_notifier.dart';
-// import 'package:matrix_app_project/features/presentaition/statemanagement/provider/comment_provider/comment_provider.dart';
-// import 'package:matrix_app_project/features/presentaition/statemanagement/provider/follow_unfollow_user/follow_unfollow_provider.dart';
+import 'package:matrix_app_project/features/presentaition/statemanagement/provider/edit_profile/edit_profile.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/get_user_profile/get_userdata_profile_provider.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/user_data_provider/follow_user.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/search_provider/search_provider.dart';
@@ -76,6 +72,9 @@ class MyApp extends StatelessWidget {
 
         ChangeNotifierProvider(
           create: (context) => GetUserDataProvider(),
+        ),
+         ChangeNotifierProvider(
+          create: (context) => EditProfileProvider(),
         ),
       ],
       child: MaterialApp(

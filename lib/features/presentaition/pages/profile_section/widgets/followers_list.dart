@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:matrix_app_project/core/usecases/colors.dart';
-import 'package:matrix_app_project/features/data/functions/user_data/get_user_data.dart';
 import 'package:matrix_app_project/features/data/models/user.dart';
 import 'package:matrix_app_project/features/presentaition/pages/profile_section/screen/profile_page.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/get_user_profile/get_userdata_profile_provider.dart';
-import 'package:matrix_app_project/features/presentaition/widgets/global/costum_appbar_widget.dart';
+import 'package:matrix_app_project/features/presentaition/widgets/global/costum_button.dart';
 
 class FollowersList extends StatelessWidget {
   const FollowersList({super.key, required this.name, required this.followers});
@@ -16,7 +15,7 @@ class FollowersList extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(name,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 20, fontWeight: FontWeight.bold, color: blackClr)),
         centerTitle: true,
       ),
@@ -30,7 +29,7 @@ class FollowersList extends StatelessWidget {
               future: GetUserDataProvider().getUserDataDetailsProvider(userId!),
               builder: (context, followsnapshot) {
                 if (followsnapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
@@ -57,6 +56,7 @@ class FollowersList extends StatelessWidget {
                           ),
                           radius: 23,
                           child: ClipOval(
+                            // ignore: unnecessary_null_comparison
                             child: followsnapshot.data!.photoUrl != null
                                 ? Image.network(
                                     followsnapshot.data!.photoUrl,
@@ -74,7 +74,9 @@ class FollowersList extends StatelessWidget {
                         ),
                         title: Text(followsnapshot.data!.username ),
                         subtitle: Text(followsnapshot.data!.about ),
+                        trailing: ElevatedButton(onPressed: (){}, child: Text('Following'),),
                       ),
+
                     ),
                   ],
                 );

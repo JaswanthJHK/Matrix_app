@@ -71,10 +71,10 @@ class DescriptionArea extends StatelessWidget {
             child: Visibility(
               visible: commentLength>0,
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 4),
+                padding: const EdgeInsets.symmetric(vertical: 4),
                 child: Text(
                   'View all $commentLength comments',
-                  style: TextStyle(fontSize: 16, color: greyLite),
+                  style: const TextStyle(fontSize: 16, color: greyLite),
                 ),
               ),
             ),

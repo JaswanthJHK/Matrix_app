@@ -1,11 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:matrix_app_project/core/usecases/colors.dart';
 import 'package:matrix_app_project/features/data/functions/firestore_methodes.dart';
 import 'package:matrix_app_project/features/data/models/user.dart';
 import 'package:matrix_app_project/features/presentaition/pages/comment_section/widgets/comment_srtreambuilder.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/user_provider.dart';
-import 'package:matrix_app_project/features/presentaition/pages/comment_section/widgets/comment_card.dart';
 import 'package:matrix_app_project/features/presentaition/widgets/global/costum_appbar_widget.dart';
 import 'package:provider/provider.dart';
 
