@@ -12,7 +12,7 @@ class FeedScreen extends StatefulWidget {
   State<FeedScreen> createState() => _FeedScreenState();
 }
 
-class _FeedScreenState extends State<FeedScreen> {
+class _FeedScreenState extends State<FeedScreen>with AutomaticKeepAliveClientMixin {
   
   @override
   void initState() {
@@ -37,4 +37,8 @@ class _FeedScreenState extends State<FeedScreen> {
         body: PostCardStream(),
         );
   }
+  
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

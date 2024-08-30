@@ -25,7 +25,7 @@ class ProfilPage extends StatefulWidget {
   State<ProfilPage> createState() => _ProfilPageState();
 }
 
-class _ProfilPageState extends State<ProfilPage> {
+class _ProfilPageState extends State<ProfilPage>with AutomaticKeepAliveClientMixin<ProfilPage> {
   var userData = {};
   int postLength = 0;
   int? followers;
@@ -294,4 +294,8 @@ class _ProfilPageState extends State<ProfilPage> {
       isLoading = false;
     });
   }
+  
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

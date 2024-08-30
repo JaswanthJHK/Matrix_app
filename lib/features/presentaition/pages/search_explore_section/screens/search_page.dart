@@ -6,9 +6,14 @@ import 'package:matrix_app_project/features/presentaition/pages/search_explore_s
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/search_provider/search_provider.dart';
 import 'package:provider/provider.dart';
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen>with AutomaticKeepAliveClientMixin<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     Provider.of<SearchProvider>(context, listen: false).getAllUser();
@@ -93,7 +98,7 @@ class SearchScreen extends StatelessWidget {
                 }
                 return GridView.builder(
                   itemCount: (snapshot.data! as dynamic).docs.length,
-                  gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                   ),
                   itemBuilder: (context, index) => Padding(
@@ -141,5 +146,8 @@ class SearchScreen extends StatelessWidget {
           }
         }));
   }
+  
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
-
