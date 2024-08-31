@@ -29,26 +29,29 @@ class _BottomNavBarState extends State<BottomNavBar> {
     const SearchScreen(),
     const AddPostScreen(),
     const MessagePage(),
-     ProfilPage(uid: FirebaseAuth.instance.currentUser!.uid,),
+    ProfilPage(
+      uid: FirebaseAuth.instance.currentUser!.uid,
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-      backgroundColor: scffoldBackgroundClr,
+      backgroundColor: Theme.of(context).colorScheme.primary,
       body: _screens.elementAt(_selectedIndex),
-      
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3,),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 5,
+          vertical: 3,
+        ),
         child: GNav(
-          backgroundColor: scffoldBackgroundClr,
+          backgroundColor: Theme.of(context).colorScheme.primary,
           //color: scffoldBackgroundClr,
           duration: const Duration(milliseconds: 900),
-          rippleColor: const Color.fromARGB(255, 143, 143, 143),
+          rippleColor: Theme.of(context).colorScheme.primaryContainer ,
           gap: 5,
           padding: const EdgeInsets.all(16),
-          tabBackgroundColor: const Color.fromARGB(255, 194, 194, 194),
+          tabBackgroundColor: Theme.of(context).colorScheme.primaryContainer,
           tabs: const [
             GButton(
               icon: Icons.home,
@@ -62,7 +65,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               icon: Icons.add,
               text: 'Add post',
             ),
-             GButton(
+            GButton(
               icon: Icons.message_outlined,
               text: 'Messeges',
             ),

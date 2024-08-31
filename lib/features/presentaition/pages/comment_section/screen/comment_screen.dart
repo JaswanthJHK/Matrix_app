@@ -28,9 +28,10 @@ class _CommentScreenState extends State<CommentScreen> {
   Widget build(BuildContext context) {
     final User? user = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
-      backgroundColor: scffoldBackgroundClr,
+      backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       appBar: const CostumAppBarWidget(
         title: 'Comments',
+        titleAlign: true,
       ),
       body: CommentStreambuilder(widget: widget),
       bottomNavigationBar: SafeArea(
@@ -91,5 +92,3 @@ class _CommentScreenState extends State<CommentScreen> {
     );
   }
 }
-
-

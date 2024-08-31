@@ -26,7 +26,8 @@ class PostCard extends StatefulWidget {
   State<PostCard> createState() => _PostCardState();
 }
 
-class _PostCardState extends State<PostCard> {
+class _PostCardState extends State<PostCard>
+    with AutomaticKeepAliveClientMixin<PostCard> {
   bool isLikeAnimating = false;
   int commentLength = 0;
 
@@ -35,7 +36,6 @@ class _PostCardState extends State<PostCard> {
     super.initState();
     getCommentLen();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +74,9 @@ class _PostCardState extends State<PostCard> {
                         children: [
                           Text(
                             widget.snap?['username'],
-                            style: const TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).colorScheme.secondary),
                           )
                         ],
                       ),
@@ -99,7 +101,10 @@ class _PostCardState extends State<PostCard> {
                               },
                             );
                           },
-                          icon: const Icon(Icons.more_vert),
+                          icon: Icon(
+                            Icons.more_vert,
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
                         )
                       : const SizedBox()
                 ],
@@ -129,7 +134,10 @@ class _PostCardState extends State<PostCard> {
                     child: Stack(
                       children: [
                         Center(
-                         child: Image.asset('asset/images/fadeinImage.png',fit: BoxFit.cover,),
+                          child: Image.asset(
+                            'asset/images/fadeinImage.png',
+                            fit: BoxFit.cover,
+                          ),
                         ),
                         FadeInImage.memoryNetwork(
                           height: MediaQuery.of(context).size.height * 0.45,
@@ -154,7 +162,7 @@ class _PostCardState extends State<PostCard> {
                           isLikeAnimating = false;
                         });
                       },
-                      child:  const Icon(
+                      child: const Icon(
                         Icons.favorite,
                         color: Colors.white,
                         size: 110,
@@ -162,18 +170,14 @@ class _PostCardState extends State<PostCard> {
                     ),
                   )
                 ],
-              )
-      
-              ),
-      
+              )),
+
           // like and comment section
-      
-          LikeAndComment(
-            widget: widget,
-            user: user
-         //   user: user!                                        this was here before the normal user    01/7/2024
-          ),
-      
+
+          LikeAndComment(widget: widget, user: user
+              //   user: user!                                        this was here before the normal user    01/7/2024
+              ),
+
           // DESCRIPTION AND NUMBER OF COMMENT AND LIKES
           DescriptionArea(
             widget: widget,
@@ -183,23 +187,27 @@ class _PostCardState extends State<PostCard> {
       ),
     );
   }
-  
+
   void getCommentLen() {
-  if (widget.snap == null) {
-    return; // Exit early if widget.snap is null
+    if (widget.snap == null) {
+      return; // Exit early if widget.snap is null
+    }
+
+    FirebaseFirestore.instance
+        .collection('posts')
+        .doc(widget.snap?['postId'])
+        .collection('comments')
+        .snapshots()
+        .listen((QuerySnapshot snap) {
+      commentLength = snap.docs.length;
+
+      setState(() {});
+    }, onError: (e) {
+      showSnackBarMethod(e.toString(), context);
+    });
   }
 
-  FirebaseFirestore.instance
-      .collection('posts')
-      .doc(widget.snap?['postId'])
-      .collection('comments')
-      .snapshots()
-      .listen((QuerySnapshot snap) {
-    commentLength = snap.docs.length;
-  
-    setState(() {});
-  }, onError: (e) {
-    showSnackBarMethod(e.toString(), context);
-  });
-}
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

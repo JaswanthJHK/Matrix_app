@@ -5,30 +5,26 @@ import 'package:matrix_app_project/features/auth/splash_screen.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/auth_methodes.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/login_auth_methods.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/add_post/edit_post.dart';
-import 'package:matrix_app_project/features/presentaition/statemanagement/provider/add_post/edit_profile.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/chat_provider/chat_provider.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/edit_profile/edit_profile.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/get_user_profile/get_userdata_profile_provider.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/user_data_provider/follow_user.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/search_provider/search_provider.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/user_provider.dart';
+import 'package:matrix_app_project/features/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 
-
-Future<void> _backgroundMessageHandler(
-    RemoteMessage message) async {
-  await Firebase.initializeApp(
-   
-  );
+Future<void> _backgroundMessageHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
 }
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-  );
+  await Firebase.initializeApp();
   await FirebaseMessaging.instance.getInitialMessage();
   FirebaseMessaging.onBackgroundMessage(_backgroundMessageHandler);
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(create: (context) => ThemeProvider(),
+  child:const MyApp(),));
 }
 
 class MyApp extends StatelessWidget {
@@ -73,15 +69,14 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => GetUserDataProvider(),
         ),
-         ChangeNotifierProvider(
+        ChangeNotifierProvider(
           create: (context) => EditProfileProvider(),
         ),
+       
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          useMaterial3: true,
-        ),
+         theme: Provider.of<ThemeProvider>(context).themeData,
         home: const SplashScreen(),
       ),
     );

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:matrix_app_project/core/usecases/colors.dart';
 import 'package:matrix_app_project/features/presentaition/widgets/feature_widgets/logout_show_dialog.dart';
+import 'package:matrix_app_project/features/theme/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 class DrawerMenu extends StatelessWidget {
   const DrawerMenu({Key? key}) : super(key: key);
@@ -24,6 +26,16 @@ class DrawerMenu extends StatelessWidget {
                   //   ),
                   // ),
                   Image.asset('asset/images/Main_logo.png')),
+          ListTile(
+              leading: Icon(Icons.dark_mode),
+              title: const Text('Dark Mode'),
+              trailing: Switch(
+                value: Provider.of<ThemeProvider>(context, listen: false)
+                    .isDarkMode,
+                onChanged: (value) =>
+                    Provider.of<ThemeProvider>(context, listen: false)
+                        .toggleTheme(),
+              )),
           ListTile(
             leading: const Icon(Icons.policy),
             title: const Text('Privacy Policy'),

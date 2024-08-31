@@ -28,13 +28,14 @@ class _FeedScreenState extends State<FeedScreen>with AutomaticKeepAliveClientMix
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-        backgroundColor: scffoldBackgroundClr,
-        appBar: CostumAppBarWidget(
+    return  Scaffold(
+        backgroundColor:  Theme.of(context).colorScheme.primary,
+        appBar:const CostumAppBarWidget(
           title: 'MATRIX',
+          titleAlign: false,
           leading: Image(image: AssetImage('asset/images/Main_logo.png')),
         ),
-        body: PostCardStream(),
+        body:const PostCardStream(),
         );
   }
   

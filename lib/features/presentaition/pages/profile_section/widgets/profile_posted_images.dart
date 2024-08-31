@@ -20,6 +20,7 @@ class ProfilePostedImages extends StatelessWidget {
        backgroundColor: scffoldBackgroundClr,
         appBar: const CostumAppBarWidget(
           title: 'Posts',
+          titleAlign: true,
           
         ),
       body: StreamBuilder(

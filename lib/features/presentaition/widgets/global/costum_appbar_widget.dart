@@ -6,6 +6,7 @@ import 'package:matrix_app_project/features/data/models/user.dart';
 class CostumAppBarWidget extends StatelessWidget
     implements PreferredSizeWidget {
   final String title;
+  final bool? titleAlign;
   final Widget? leading;
   final bool showActionIcon;
   final VoidCallback? onMenuAction;
@@ -13,6 +14,7 @@ class CostumAppBarWidget extends StatelessWidget
   const CostumAppBarWidget({
     super.key,
     this.title = '',
+    required this.titleAlign,
     this.leading,
     this.showActionIcon = false,
     this.onMenuAction,
@@ -21,7 +23,7 @@ class CostumAppBarWidget extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: scffoldBackgroundClr,
+      color: Theme.of(context).colorScheme.primary,
       elevation: 1.0,
       child: SafeArea(
         child: Padding(
@@ -32,16 +34,28 @@ class CostumAppBarWidget extends StatelessWidget
           child: Stack(
             children: [
               Positioned.fill(
-                child: Center(
-                  child: Text(
-                    title,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 26,
-                      color: blackClr,
-                    ),
-                  ),
-                ),
+                child: titleAlign == true
+                    ? Padding(
+                        padding: const EdgeInsets.only(left: 50, top: 5),
+                        child: Text(
+                          title,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 26,
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                        ),
+                      )
+                    : Center(
+                        child: Text(
+                          title,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 26,
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                        ),
+                      ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

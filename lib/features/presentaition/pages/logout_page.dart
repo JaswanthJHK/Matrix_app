@@ -16,7 +16,8 @@ class _HomeScreenState extends State<LogOutPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CostumAppBarWidget(
-        leading: IconButton(onPressed:() =>Navigator.pop(context) , icon: const BackButton()),
+        leading: IconButton(onPressed:() =>Navigator.pop(context) , icon: const BackButton(),),
+        titleAlign: false,
       ),
       body: Center(
         child: Column(

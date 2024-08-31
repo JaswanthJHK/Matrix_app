@@ -41,8 +41,6 @@ class _AddPostScreenState extends State<AddPostScreen> {
   TextEditingController _captionController = TextEditingController();
   bool _isLoading = false;
 
- 
-
   selectImage(BuildContext context) async {
     return showDialog(
       context: context,
@@ -108,6 +106,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
             backgroundColor: scffoldBackgroundClr,
             appBar: const CostumAppBarWidget(
               title: 'Add your post',
+              titleAlign: false,
               leading: Image(image: AssetImage('asset/images/Main_logo.png')),
             ),
             body: SingleChildScrollView(
@@ -129,6 +128,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
             backgroundColor: scffoldBackgroundClr,
             appBar: const CostumAppBarWidget(
               title: 'Add your post',
+              titleAlign: false,
+              leading: Image(image: AssetImage('asset/images/Main_logo.png')),
             ),
             body: SingleChildScrollView(
               child: Column(
@@ -167,7 +168,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
             ),
           );
   }
-   postImage(
+
+  postImage(
     String uid,
     String username,
     String profImage,
@@ -182,7 +184,6 @@ class _AddPostScreenState extends State<AddPostScreen> {
         uid,
         username,
         profImage,
-        
       );
       if (res == 'success') {
         setState(() {

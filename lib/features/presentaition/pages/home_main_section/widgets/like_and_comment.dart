@@ -13,32 +13,36 @@ class LikeAndComment extends StatelessWidget {
   });
 
   final PostCard widget;
-  final User? user;                                              // before here there is no null aware    01/7/2024
-  
+  final User? user; // before here there is no null aware    01/7/2024
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         LikeAnimation(
-          isAnimating: widget.snap['likes'].contains(user?.uid), // added null aware   01/7/2024
+          isAnimating: widget.snap['likes']
+              .contains(user?.uid), // added null aware   01/7/2024
           smallLike: true,
           child: IconButton(
               onPressed: () async {
                 await FirestoreMethodes().likePost(
                   widget.snap['postId'],
-                  user?.uid as String,                           // here added null aware and type casitng  01/7/2024
+                  user?.uid
+                      as String, // here added null aware and type casitng  01/7/2024
                   widget.snap['likes'],
                 );
               },
-              icon: widget.snap['likes'].contains(user?.uid)     // added null aware   01/7/2024
+              icon: widget.snap['likes']
+                      .contains(user?.uid) // added null aware   01/7/2024
                   ? const Icon(
                       Icons.favorite,
                       color: Colors.red,
                       size: 30,
                     )
-                  : const Icon(
+                  : Icon(
                       Icons.favorite_border_outlined,
+                      size: 30,
+                      color: Theme.of(context).colorScheme.secondary,
                     )),
         ),
         IconButton(
@@ -47,9 +51,10 @@ class LikeAndComment extends StatelessWidget {
               snap: widget.snap,
             ),
           )),
-          icon: const Icon(
+          icon: Icon(
             Icons.comment_outlined,
             size: 30,
+            color: Theme.of(context).colorScheme.secondary,
           ),
         ),
       ],

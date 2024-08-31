@@ -23,6 +23,7 @@ class EditPostPage extends StatelessWidget {
       backgroundColor: scffoldBackgroundClr,
       appBar: const CostumAppBarWidget(
         title: 'Edit post',
+        titleAlign: false,
       ),
       body: SingleChildScrollView(
         child: Column(

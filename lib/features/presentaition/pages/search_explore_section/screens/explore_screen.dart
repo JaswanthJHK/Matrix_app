@@ -12,6 +12,7 @@ class ExploreScreen extends StatelessWidget {
       backgroundColor: scffoldBackgroundClr,
       appBar: CostumAppBarWidget(
         title: "Explore",
+        titleAlign: false,
       ),
       body: PostCardStream() ,
     );

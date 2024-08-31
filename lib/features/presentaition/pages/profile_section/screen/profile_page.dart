@@ -25,7 +25,8 @@ class ProfilPage extends StatefulWidget {
   State<ProfilPage> createState() => _ProfilPageState();
 }
 
-class _ProfilPageState extends State<ProfilPage>with AutomaticKeepAliveClientMixin<ProfilPage> {
+class _ProfilPageState extends State<ProfilPage>
+    with AutomaticKeepAliveClientMixin<ProfilPage> {
   var userData = {};
   int postLength = 0;
   int? followers;
@@ -47,12 +48,13 @@ class _ProfilPageState extends State<ProfilPage>with AutomaticKeepAliveClientMix
           )
         : Scaffold(
             backgroundColor: scffoldBackgroundClr,
-            appBar: const CostumAppBarWidget(
-              title: 'Profile',
-              leading: Image(image: AssetImage('asset/images/Main_logo.png')),
+            appBar: CostumAppBarWidget(
+              title: userData['username'],
+              titleAlign: true,
+              // leading: Image(image: AssetImage('asset/images/Main_logo.png')),
               showActionIcon: true,
             ),
-            drawer: DrawerMenu(),
+            drawer: const DrawerMenu(),
             //       AppBar(
             //         backgroundColor: scffoldBackgroundClr,
             //         elevation: 0,
@@ -94,7 +96,8 @@ class _ProfilPageState extends State<ProfilPage>with AutomaticKeepAliveClientMix
                                       );
                                     },
                                   );
-                                  Future.delayed(Duration(seconds: 2), () {
+                                  Future.delayed(const Duration(seconds: 2),
+                                      () {
                                     Navigator.pop(context);
                                   });
                                 },
@@ -121,7 +124,8 @@ class _ProfilPageState extends State<ProfilPage>with AutomaticKeepAliveClientMix
                                         userData['username'],
                                         style: const TextStyle(
                                             fontWeight: FontWeight.w600,
-                                            fontSize: 18),
+                                            fontSize: 18,
+                                            color: Colors.black),
                                       ),
                                       sizeEight,
                                       Text(userData['about']),
@@ -294,7 +298,7 @@ class _ProfilPageState extends State<ProfilPage>with AutomaticKeepAliveClientMix
       isLoading = false;
     });
   }
-  
+
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;

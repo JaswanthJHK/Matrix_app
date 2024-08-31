@@ -39,12 +39,14 @@ class AddPostScreeShowImage extends StatelessWidget {
     );
   }
 }
+
 class AddPostScreenImageUpload extends StatelessWidget {
   const AddPostScreenImageUpload({
     super.key,
     required MediaQueryData mediaquery,
     required Uint8List? file,
-  }) : _mediaquery = mediaquery, _file = file;
+  })  : _mediaquery = mediaquery,
+        _file = file;
 
   final MediaQueryData _mediaquery;
   final Uint8List? _file;
@@ -55,8 +57,7 @@ class AddPostScreenImageUpload extends StatelessWidget {
       width: _mediaquery.size.width * 0.87,
       height: _mediaquery.size.height * 0.4,
       decoration: BoxDecoration(
-          image: DecorationImage(
-              image: MemoryImage(_file!), fit: BoxFit.cover),
+          image: DecorationImage(image: MemoryImage(_file!), fit: BoxFit.cover),
           border: Border.all(color: Colors.grey, width: 2.0),
           color: const Color.fromARGB(255, 164, 164, 164),
           borderRadius: BorderRadius.circular(8)),

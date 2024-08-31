@@ -2,9 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:matrix_app_project/features/presentaition/pages/home_main_section/widgets/post_card.dart';
 
-class PostCardStream extends StatelessWidget {
+class PostCardStream extends StatefulWidget {
   const PostCardStream({super.key});
 
+  @override
+  State<PostCardStream> createState() => _PostCardStreamState();
+}
+
+class _PostCardStreamState extends State<PostCardStream> {
     @override
   Widget build(BuildContext context) {
     return StreamBuilder(

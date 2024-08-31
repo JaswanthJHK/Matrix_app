@@ -11,8 +11,7 @@ class DescriptionArea extends StatelessWidget {
     required this.commentLength,
   });
 
-   final PostCard widget;
-  
+  final PostCard widget;
 
   final int commentLength;
 
@@ -47,13 +46,15 @@ class DescriptionArea extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: widget.snap['username'],
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 16),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Theme.of(context).colorScheme.secondary),
                   ),
                   TextSpan(
                     text: '  ${widget.snap['description']}',
-                    style: const TextStyle(
-                      color: Color.fromARGB(255, 58, 58, 58),
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                 ],
@@ -69,7 +70,7 @@ class DescriptionArea extends StatelessWidget {
               );
             },
             child: Visibility(
-              visible: commentLength>0,
+              visible: commentLength > 0,
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 4),
                 child: Text(
