@@ -45,8 +45,10 @@ class _UserItemsState extends State<UserItems> {
         ),
         title: Text(
           widget.user.username,
-          style: const TextStyle(
-              color: blackClr, fontSize: 18, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              color: Theme.of(context).colorScheme.secondary,
+              fontSize: 18,
+              fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
           "Last seen ${timeago.format(widget.user.lastActive)}",
@@ -54,11 +56,12 @@ class _UserItemsState extends State<UserItems> {
           style: const TextStyle(
               color: greyDark, fontSize: 11, overflow: TextOverflow.ellipsis),
         ),
-        trailing: Text(_formatLastActive(widget.user.lastActive)) ,
+        trailing: Text(_formatLastActive(widget.user.lastActive)),
       ),
     );
   }
 }
+
 String _formatLastActive(DateTime lastActive) {
   final now = DateTime.now();
   final difference = now.difference(lastActive);

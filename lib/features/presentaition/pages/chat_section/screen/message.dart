@@ -63,7 +63,7 @@ class _MessagePageState extends State<MessagePage> with WidgetsBindingObserver {
         FirebaseFirestoreService.updateUserData({'isOnline': false});
         break;
       case AppLifecycleState.hidden:
-        // TODO: Handle this case.
+      // TODO: Handle this case.
     }
   }
 
@@ -76,7 +76,7 @@ class _MessagePageState extends State<MessagePage> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: scffoldBackgroundClr,
+      backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: const CostumAppBarWidget(
         title: "Messeges",
         titleAlign: false,

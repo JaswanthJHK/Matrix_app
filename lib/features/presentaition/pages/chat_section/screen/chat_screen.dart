@@ -28,6 +28,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //  backgroundColor: Colors.pink,
       appBar: _buildAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -41,8 +42,6 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
     );
   }
-
- 
 
   AppBar _buildAppBar() => AppBar(
       elevation: 0,
@@ -69,8 +68,8 @@ class _ChatScreenState extends State<ChatScreen> {
                       children: [
                         Text(
                           value.user!.username,
-                          style: const TextStyle(
-                            color: Colors.black,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondary,
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),

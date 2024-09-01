@@ -28,7 +28,7 @@ class _CommentScreenState extends State<CommentScreen> {
   Widget build(BuildContext context) {
     final User? user = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+      backgroundColor: Theme.of(context).colorScheme.primaryFixed,
       appBar: const CostumAppBarWidget(
         title: 'Comments',
         titleAlign: true,
@@ -36,12 +36,22 @@ class _CommentScreenState extends State<CommentScreen> {
       body: CommentStreambuilder(widget: widget),
       bottomNavigationBar: SafeArea(
         child: Container(
-          color: Colors.grey[200],
+          // color: Theme.of(context).colorScheme.primaryFixed,
           height: kToolbarHeight,
           margin: EdgeInsets.only(
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
+          decoration: const BoxDecoration(
+            border: Border(
+              top: BorderSide(
+                color: Colors.white,
+                width: 0.2,
+              ),
+            ),
+          ),
+
           padding: const EdgeInsets.only(left: 16, right: 8),
+
           child: Row(
             children: [
               CircleAvatar(
@@ -75,9 +85,12 @@ class _CommentScreenState extends State<CommentScreen> {
                   });
                 },
                 child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white),
                   padding: const EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 8,
+                    vertical: 6,
+                    horizontal: 18,
                   ),
                   child: const Text(
                     'Post',

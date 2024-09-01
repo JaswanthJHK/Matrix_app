@@ -47,7 +47,7 @@ class _ProfilPageState extends State<ProfilPage>
             child: CircularProgressIndicator(),
           )
         : Scaffold(
-            backgroundColor: scffoldBackgroundClr,
+            backgroundColor: Theme.of(context).colorScheme.primary,
             appBar: CostumAppBarWidget(
               title: userData['username'],
               titleAlign: true,
@@ -122,10 +122,12 @@ class _ProfilPageState extends State<ProfilPage>
                                       sizeTen,
                                       Text(
                                         userData['username'],
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 18,
-                                            color: Colors.black),
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .secondary),
                                       ),
                                       sizeEight,
                                       Text(userData['about']),
@@ -238,7 +240,10 @@ class _ProfilPageState extends State<ProfilPage>
                     ],
                   ),
                 ),
-                const Divider(),
+                const Divider(
+                  height: 0.1,
+                ),
+                sizeEight,
                 ProfilePostGrid(widget: widget)
               ],
             ),

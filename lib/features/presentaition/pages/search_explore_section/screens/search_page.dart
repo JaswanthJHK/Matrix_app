@@ -13,26 +13,38 @@ class SearchScreen extends StatefulWidget {
   State<SearchScreen> createState() => _SearchScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen>with AutomaticKeepAliveClientMixin<SearchScreen> {
+class _SearchScreenState extends State<SearchScreen>
+    with AutomaticKeepAliveClientMixin<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     Provider.of<SearchProvider>(context, listen: false).getAllUser();
     return Scaffold(
-        backgroundColor: scffoldBackgroundClr,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         appBar: AppBar(
-          backgroundColor: scffoldBackgroundClr,
-          leading: const Icon(Icons.search),
-          title: TextFormField(
-            controller: Provider.of<SearchProvider>(context, listen: false)
-                .searchController,
-            decoration: const InputDecoration(
-              fillColor: Colors.grey,
-              labelText: 'Search here...',
+          backgroundColor: Theme.of(context).colorScheme.primaryFixed,
+          leading: const Padding(
+            padding: EdgeInsets.only(left: 20),
+            child: Icon(
+              Icons.search,
+              size: 35,
             ),
-            onChanged: (value) {
-              Provider.of<SearchProvider>(context, listen: false)
-                  .getSearchedList(value);
-            },
+          ),
+          title: Padding(
+            padding: const EdgeInsets.only(right: 10, top: 10, bottom: 10),
+            child: TextFormField(
+              controller: Provider.of<SearchProvider>(context, listen: false)
+                  .searchController,
+              decoration: const InputDecoration(
+                  fillColor: Color.fromARGB(255, 225, 39, 39),
+                  labelText: 'Search here...',
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(width: 0, color: Colors.white),
+                      borderRadius: BorderRadius.all(Radius.circular(20)))),
+              onChanged: (value) {
+                Provider.of<SearchProvider>(context, listen: false)
+                    .getSearchedList(value);
+              },
+            ),
           ),
         ),
         body: //Provider.of<SearchProvider>(context, listen: false)
@@ -96,46 +108,52 @@ class _SearchScreenState extends State<SearchScreen>with AutomaticKeepAliveClien
                     child: CircularProgressIndicator(),
                   );
                 }
-                return GridView.builder(
-                  itemCount: (snapshot.data! as dynamic).docs.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                  ),
-                  itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.all(2.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const ExploreScreen(),
-                              ));
-                        },
-                        child: Image.network(
-                          (snapshot.data! as dynamic).docs[index]['postUrl'],
-                          fit: BoxFit.cover,
-                          loadingBuilder: (context, child, loadingProgress) {
-                            if (loadingProgress == null) {
-                              return child;
-                            } else {
-                              return Center(
-                                child: RotationTransition(
-                                  turns: AlwaysStoppedAnimation(loadingProgress
-                                              .expectedTotalBytes !=
-                                          null
-                                      ? loadingProgress.cumulativeBytesLoaded /
-                                          (loadingProgress.expectedTotalBytes ??
-                                              1)
-                                      : 0),
-                                  child: const CircularProgressIndicator(
-                                    color: greyLite,
-                                  ),
-                                ),
-                              );
-                            }
+                return Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: GridView.builder(
+                    itemCount: (snapshot.data! as dynamic).docs.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                    ),
+                    itemBuilder: (context, index) => Padding(
+                      padding: const EdgeInsets.all(2.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const ExploreScreen(),
+                                ));
                           },
+                          child: Image.network(
+                            (snapshot.data! as dynamic).docs[index]['postUrl'],
+                            fit: BoxFit.cover,
+                            loadingBuilder: (context, child, loadingProgress) {
+                              if (loadingProgress == null) {
+                                return child;
+                              } else {
+                                return Center(
+                                  child: RotationTransition(
+                                    turns: AlwaysStoppedAnimation(
+                                        loadingProgress.expectedTotalBytes !=
+                                                null
+                                            ? loadingProgress
+                                                    .cumulativeBytesLoaded /
+                                                (loadingProgress
+                                                        .expectedTotalBytes ??
+                                                    1)
+                                            : 0),
+                                    child: const CircularProgressIndicator(
+                                      color: greyLite,
+                                    ),
+                                  ),
+                                );
+                              }
+                            },
+                          ),
                         ),
                       ),
                     ),
@@ -146,7 +164,7 @@ class _SearchScreenState extends State<SearchScreen>with AutomaticKeepAliveClien
           }
         }));
   }
-  
+
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
