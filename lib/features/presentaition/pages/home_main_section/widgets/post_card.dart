@@ -75,7 +75,7 @@ class _PostCardState extends State<PostCard>
                           Text(
                             widget.snap?['username'],
                             style: TextStyle(
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w500,
                                 color: Theme.of(context).colorScheme.secondary),
                           )
                         ],
@@ -106,7 +106,9 @@ class _PostCardState extends State<PostCard>
                             color: Theme.of(context).colorScheme.secondary,
                           ),
                         )
-                      : const SizedBox()
+                      : IconButton(onPressed: () {
+                        
+                      }, icon:const Icon(Icons.more_vert))
                 ],
               ),
             ),
@@ -206,6 +208,61 @@ class _PostCardState extends State<PostCard>
       showSnackBarMethod(e.toString(), context);
     });
   }
+   // show options
+  void _showOptions(BuildContext context, String messageId, String userId) {
+    Color iconColor = Theme.of(context).colorScheme.secondaryContainer;
+
+    showModalBottomSheet(
+      backgroundColor: Theme.of(context).colorScheme.primaryFixed,
+      context: context,
+      builder: (context) {
+        return SafeArea(
+            child: Wrap(
+          children: [
+            // report message
+            ListTile(
+              leading: Icon(Icons.flag_outlined, color: iconColor),
+              title: Text(
+                "  R E P O R T",
+                style: TextStyle(color: iconColor),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+             //   _reportMessage(context, messageId, userId);
+              },
+            ),
+
+            // block user
+            ListTile(
+              leading: Icon(Icons.block, color: iconColor),
+              title: Text(
+                "  B L O C K",
+                style: TextStyle(color: iconColor),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              //  _blockUser(context, userId);
+              },
+            ),
+
+            // cancel
+            ListTile(
+              leading: Icon(Icons.cancel_outlined, color: iconColor),
+              title: Text(
+                "  C A N C E L",
+                style: TextStyle(color: iconColor),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            sizeFifty,
+          ],
+        ));
+      },
+    );
+  }
+
 
   @override
   // TODO: implement wantKeepAlive

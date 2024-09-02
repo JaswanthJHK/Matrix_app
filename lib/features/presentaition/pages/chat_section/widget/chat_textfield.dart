@@ -74,6 +74,8 @@ class _ChatTextFieldState extends State<ChatTextField> {
     );
   }
 
+  // message sending function
+
   Future<void> _sendText(BuildContext context) async {
     if (chatController.text.isNotEmpty) {
       await FirebaseFirestoreService.addTextMessage(

@@ -8,7 +8,7 @@ import 'package:matrix_app_project/features/data/models/message_model.dart';
 import 'package:matrix_app_project/features/data/models/user.dart' as model;
 
 class FirebaseFirestoreService {
-  static final firestore = FirebaseFirestore.instance;
+  static final _firestore = FirebaseFirestore.instance;
 
   static Future<void> createUser(
       {required String username,
@@ -28,7 +28,7 @@ class FirebaseFirestoreService {
       following: [],
     );
 
-    await firestore.collection('users').doc(uid).set(user.toJson());
+    await _firestore.collection('users').doc(uid).set(user.toJson());
   }
 
   static Future<void> addTextMessage({
@@ -66,7 +66,7 @@ class FirebaseFirestoreService {
     String receiverId,
     Message message,
   ) async {
-    await firestore
+    await _firestore
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('chat')
@@ -74,7 +74,7 @@ class FirebaseFirestoreService {
         .collection('messages')
         .add(message.toJson());
 
-    await firestore
+    await _firestore
         .collection('users')
         .doc(receiverId)
         .collection('chat')
@@ -84,8 +84,21 @@ class FirebaseFirestoreService {
   }
 
   static Future<void> updateUserData(Map<String, dynamic> data) async =>
-      await firestore
+      await _firestore
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update(data);
+
+// user Report Function
+
+  static Future<void> reportUser(String reportUserId, String postId) async {
+    final report = {
+      'reportedBy': FirebaseAuth.instance.currentUser!.uid,
+      'postId': postId,
+      'postOwnerId': reportUserId,
+      'timeStampp': FieldValue.serverTimestamp(),
+    };
+
+    await _firestore.collection('Report').add(report);
+  }
 }

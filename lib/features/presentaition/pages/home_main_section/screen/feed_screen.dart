@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:matrix_app_project/core/usecases/colors.dart';
 import 'package:matrix_app_project/features/presentaition/pages/home_main_section/widgets/postcard_stream.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/user_provider.dart';
-import 'package:matrix_app_project/features/presentaition/widgets/global/costum_appbar_widget.dart';
 import 'package:provider/provider.dart';
 
 class FeedScreen extends StatefulWidget {
