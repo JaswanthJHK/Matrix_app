@@ -5,8 +5,10 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:matrix_app_project/core/usecases/constants.dart';
 import 'package:matrix_app_project/core/util/utils.dart';
+import 'package:matrix_app_project/features/data/functions/firebase_firestore_service.dart';
 import 'package:matrix_app_project/features/data/functions/firestore_methodes.dart';
 import 'package:matrix_app_project/features/data/models/user.dart' as model;
 import 'package:matrix_app_project/features/presentaition/pages/profile_section/screen/profile_page.dart';
@@ -106,9 +108,12 @@ class _PostCardState extends State<PostCard>
                             color: Theme.of(context).colorScheme.secondary,
                           ),
                         )
-                      : IconButton(onPressed: () {
-                        
-                      }, icon:const Icon(Icons.more_vert))
+                      : IconButton(
+                          onPressed: () {
+                            _showOptions(context, widget.snap['postId'],
+                                widget.snap['uid']);
+                          },
+                          icon: const Icon(Icons.more_vert))
                 ],
               ),
             ),
@@ -208,8 +213,9 @@ class _PostCardState extends State<PostCard>
       showSnackBarMethod(e.toString(), context);
     });
   }
-   // show options
-  void _showOptions(BuildContext context, String messageId, String userId) {
+
+  // show options
+  void _showOptions(BuildContext context, String postId, String userId) {
     Color iconColor = Theme.of(context).colorScheme.secondaryContainer;
 
     showModalBottomSheet(
@@ -228,7 +234,7 @@ class _PostCardState extends State<PostCard>
               ),
               onTap: () {
                 Navigator.pop(context);
-             //   _reportMessage(context, messageId, userId);
+                   _reportMessage(context, postId, userId);
               },
             ),
 
@@ -241,7 +247,7 @@ class _PostCardState extends State<PostCard>
               ),
               onTap: () {
                 Navigator.pop(context);
-              //  _blockUser(context, userId);
+                //  _blockUser(context, userId);
               },
             ),
 
@@ -262,7 +268,44 @@ class _PostCardState extends State<PostCard>
       },
     );
   }
-
+   // report message
+  void _reportMessage(BuildContext context, String messageId, String userId) {
+    Color textColor = Theme.of(context).colorScheme.secondaryContainer;
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Theme.of(context).colorScheme.primaryFixed,
+        title: Text(
+          "R E P O R T  U S E R",
+          style: TextStyle(color: textColor),
+        ),
+        content: Text(
+          "Are you sure you want to report this user?",
+          style: TextStyle(color: textColor),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child:  Text("C A N C E L",style: TextStyle(color: Theme.of(context).colorScheme.secondary),),
+          ),
+          TextButton(
+            onPressed: () {
+              FirebaseFirestoreService().reportUser(messageId, userId);
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Message Reported"),
+                ),
+              );
+            },
+            child:  Text("R E P O R T",style: TextStyle(color: Theme.of(context).colorScheme.secondary),),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   // TODO: implement wantKeepAlive

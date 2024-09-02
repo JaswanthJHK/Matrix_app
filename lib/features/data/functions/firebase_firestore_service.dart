@@ -91,7 +91,7 @@ class FirebaseFirestoreService {
 
 // user Report Function
 
-  static Future<void> reportUser(String reportUserId, String postId) async {
+   Future<void> reportUser(String reportUserId, String postId) async {
     final report = {
       'reportedBy': FirebaseAuth.instance.currentUser!.uid,
       'postId': postId,
