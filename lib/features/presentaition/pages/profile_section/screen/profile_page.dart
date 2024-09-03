@@ -29,6 +29,7 @@ class _ProfilPageState extends State<ProfilPage>
     with AutomaticKeepAliveClientMixin<ProfilPage> {
   var userData = {};
   int postLength = 0;
+  
   int? followers;
   int? following;
   bool isLoading = false;
@@ -141,7 +142,8 @@ class _ProfilPageState extends State<ProfilPage>
                                                       builder: (context) =>
                                                           ProfileEditPage(
                                                               userId:
-                                                                  widget.uid),
+                                                                  widget.uid,
+                                                                ),
                                                     ));
                                               },
                                               text: 'Edit Profile',
@@ -287,8 +289,9 @@ class _ProfilPageState extends State<ProfilPage>
           .collection('posts')
           .where('uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
           .get();
-
+      
       postLength = postSnap.docs.length;
+     
       userData = userSnap.data()!;
       followers = userSnap.data()!['followers'].length;
       following = userSnap.data()!['following'].length;

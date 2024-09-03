@@ -225,17 +225,19 @@ class _PostCardState extends State<PostCard>
         return SafeArea(
             child: Wrap(
           children: [
-            // report message
-            ListTile(
-              leading: Icon(Icons.flag_outlined, color: iconColor),
-              title: Text(
-                "  R E P O R T",
-                style: TextStyle(color: iconColor),
+            sizeFifty,
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: ListTile(
+                leading: Icon(Icons.save_alt_sharp, color: iconColor),
+                title: Text(
+                  "  S A V E ",
+                  style: TextStyle(color: iconColor),
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
               ),
-              onTap: () {
-                Navigator.pop(context);
-                   _reportMessage(context, postId, userId);
-              },
             ),
 
             // block user
@@ -253,6 +255,30 @@ class _PostCardState extends State<PostCard>
 
             // cancel
             ListTile(
+              leading: Icon(Icons.remove_circle_outline, color: iconColor),
+              title: Text(
+                " U N F O L L O W ",
+                style: TextStyle(color: iconColor),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+
+            // report message
+            ListTile(
+              leading: Icon(Icons.report, color: iconColor),
+              title: Text(
+                "  R E P O R T",
+                style: TextStyle(color: iconColor),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+                _reportMessage(context, postId, userId);
+              },
+            ),
+
+            ListTile(
               leading: Icon(Icons.cancel_outlined, color: iconColor),
               title: Text(
                 "  C A N C E L",
@@ -268,7 +294,8 @@ class _PostCardState extends State<PostCard>
       },
     );
   }
-   // report message
+
+  // report message
   void _reportMessage(BuildContext context, String messageId, String userId) {
     Color textColor = Theme.of(context).colorScheme.secondaryContainer;
     showDialog(
@@ -288,7 +315,10 @@ class _PostCardState extends State<PostCard>
             onPressed: () {
               Navigator.pop(context);
             },
-            child:  Text("C A N C E L",style: TextStyle(color: Theme.of(context).colorScheme.secondary),),
+            child: Text(
+              "C A N C E L",
+              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+            ),
           ),
           TextButton(
             onPressed: () {
@@ -300,7 +330,10 @@ class _PostCardState extends State<PostCard>
                 ),
               );
             },
-            child:  Text("R E P O R T",style: TextStyle(color: Theme.of(context).colorScheme.secondary),),
+            child: Text(
+              "R E P O R T",
+              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+            ),
           ),
         ],
       ),

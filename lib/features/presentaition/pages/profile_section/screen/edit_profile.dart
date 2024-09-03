@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:matrix_app_project/core/usecases/colors.dart';
@@ -15,7 +16,7 @@ import 'package:provider/provider.dart';
 
 class ProfileEditPage extends StatefulWidget {
   final userId;
-  const ProfileEditPage({super.key, required this.userId});
+  const ProfileEditPage({super.key, required this.userId,});
 
   @override
   State<ProfileEditPage> createState() => _ProfileEditPageState();
@@ -33,6 +34,10 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
       _image = im;
     });
   }
+   var postSnap =  FirebaseFirestore.instance
+          .collection('posts')
+          .where('uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+          .get();
 
   @override
   Widget build(BuildContext context) {
