@@ -90,7 +90,8 @@ class DescriptionAreaWidget extends StatelessWidget {
             padding: const EdgeInsets.only(top: 2),
             child: RichText(
               text: TextSpan(
-                style: const TextStyle(color: Colors.black),
+                style:
+                    TextStyle(color: Theme.of(context).colorScheme.secondary),
                 children: [
                   TextSpan(
                     text: widget.snap['username'],
@@ -101,8 +102,8 @@ class DescriptionAreaWidget extends StatelessWidget {
                   ),
                   TextSpan(
                     text: '  ${widget.snap['description']}',
-                    style: const TextStyle(
-                      color: Color.fromARGB(255, 58, 58, 58),
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                 ],

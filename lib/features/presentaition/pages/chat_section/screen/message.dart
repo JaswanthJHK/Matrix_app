@@ -80,7 +80,7 @@ class _MessagePageState extends State<MessagePage> with WidgetsBindingObserver {
       appBar: const CostumAppBarWidget(
         title: "Messeges",
         titleAlign: false,
-        leading: Image(image: AssetImage('asset/images/Main_logo.png')),
+        // leading: Image(image: AssetImage('asset/images/Main_logo.png')),
       ),
       body: Consumer<FirebaseChatProvider>(
         builder: (context, chatvalue, child) {

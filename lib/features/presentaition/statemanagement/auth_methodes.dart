@@ -55,6 +55,7 @@ class AuthMethods extends ChangeNotifier {
           uid: cred.user!.uid,
           email: email,
           about: about,
+         
           photoUrl: photoUlr,
           following: [],
           followers: [],

@@ -9,6 +9,7 @@ class User {
   final List followers;
   final List following;
   final DateTime lastActive;
+ 
   final bool isOnline;
 
   const User({
@@ -20,6 +21,7 @@ class User {
     required this.followers,
     required this.following,
     required this.lastActive,
+   
     this.isOnline = false,
   });
 
@@ -31,8 +33,9 @@ class User {
         "photoUrl": photoUrl,
         "followers": followers,
         "following": following,
-        "lastActive":lastActive,
-        "isOnline":isOnline,
+        "lastActive": lastActive,
+      
+        "isOnline": isOnline,
       };
 
   static User fromsnap(DocumentSnapshot snap) {
@@ -46,9 +49,9 @@ class User {
       about: snaphsot['about'],
       followers: snaphsot['followers'],
       following: snaphsot['following'],
-     lastActive: (snaphsot['lastActive'] as Timestamp).toDate(),
-      isOnline: snaphsot['isOnline']?? false,
+      lastActive: (snaphsot['lastActive'] as Timestamp).toDate(),
+     
+      isOnline: snaphsot['isOnline'] ?? false,
     );
   }
-  
 }

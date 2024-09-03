@@ -10,11 +10,31 @@ class ExploreScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
-      appBar: CostumAppBarWidget(
-        title: "Explore",
-        titleAlign: false,
+      // appBar: CostumAppBarWidget(
+      //   title: "Explore",
+      //   titleAlign: false,
+      // ),
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          SliverAppBar(
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            floating: true,
+            snap: true,
+            title: Padding(
+              padding: const EdgeInsets.only(left: 0),
+              child: Text(
+                "E X P L O R E",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.secondary,
+                  fontSize: 28,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ),
+        ],
+        body: PostCardStream(),
       ),
-      body: PostCardStream(),
     );
   }
 }

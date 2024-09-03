@@ -9,46 +9,62 @@ class ProfilePostedImages extends StatelessWidget {
   const ProfilePostedImages({
     super.key,
     required this.widget,
+    required this.initialIndex,
+    required this.snaps,
   });
 
   final ProfilPage widget;
+  final int initialIndex;
+  final List<DocumentSnapshot> snaps;
 
   @override
- 
-   Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: scffoldBackgroundClr,
-        appBar: const CostumAppBarWidget(
-          title: 'Posts',
-          titleAlign: true,
-          
-        ),
-      body: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('posts')
-            .where('uid', isEqualTo: widget.uid)
-            .snapshots(),
-        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-    
-          return ListView.builder(
-            shrinkWrap: true,
-            itemCount: snapshot.data?.docs.length ?? 0,
-            itemBuilder: (context, index) {
-              DocumentSnapshot snap = snapshot.data!.docs[index];
-              return ProfilePostedCard(
-                snap: snap,
-              );
-            },
+      backgroundColor: Theme.of(context).colorScheme.primary,
+      appBar: const CostumAppBarWidget(
+        title: 'Posts',
+        titleAlign: true,
+      ),
+      body:
+
+      // commented are previous data its also working but not perfect
+          //  StreamBuilder(
+          //   stream: FirebaseFirestore.instance
+          //       .collection('posts')
+          //       .where('uid', isEqualTo: widget.uid)
+          //       .orderBy('datePublished', descending: true)
+          //       .snapshots(),
+          //   builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          //     if (snapshot.connectionState == ConnectionState.waiting) {
+          //       return const Center(
+          //         child: CircularProgressIndicator(),
+          //       );
+          //     }
+
+          //     return
+          //      ListView.builder(
+
+          //       shrinkWrap: true,
+          //       itemCount: snapshot.data?.docs.length ?? 0,
+          //       itemBuilder: (context, index) {
+          //         DocumentSnapshot snap = snapshot.data!.docs[index];
+          //         return ProfilePostedCard(
+          //           snap: snap,
+          //         );
+          //       },
+          //     );
+          //   },
+          // ),
+
+          ListView.builder(
+        controller: PageController(initialPage: initialIndex),
+        itemCount: snaps.length,
+        itemBuilder: (context, index) {
+          return ProfilePostedCard(
+            snap: snaps[index],
           );
         },
       ),
     );
   }
-
-
 }

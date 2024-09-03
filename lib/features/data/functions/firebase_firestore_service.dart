@@ -24,6 +24,7 @@ class FirebaseFirestoreService {
       about: about,
       isOnline: true,
       lastActive: DateTime.now(),
+      
       followers: [],
       following: [],
     );

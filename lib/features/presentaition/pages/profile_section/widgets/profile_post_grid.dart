@@ -17,6 +17,7 @@ class ProfilePostGrid extends StatelessWidget {
       future: FirebaseFirestore.instance
           .collection('posts')
           .where('uid', isEqualTo: widget.uid)
+          .orderBy('datePublished', descending: true)
           .get(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -24,7 +25,13 @@ class ProfilePostGrid extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         }
-         if (snapshot.data == null) {
+        if (snapshot.hasError) {
+          // return Center(
+          //   child: Text('Error: ${snapshot.error}-------------==+++++++++'),
+          // );
+          print('Error: ${snapshot.error}-------------==+++++++++');
+        }
+        if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
           return const Center(
             child: Text('No posts available.'),
           );
@@ -45,7 +52,7 @@ class ProfilePostGrid extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ProfilePostedImages(widget: widget),
+                      builder: (context) => ProfilePostedImages(widget: widget,initialIndex: index,snaps: snapshot.data!.docs,),
                     ));
               },
               child: Image(

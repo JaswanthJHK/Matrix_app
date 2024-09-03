@@ -2,7 +2,6 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:matrix_app_project/features/data/functions/storage_methods.dart';
 
@@ -41,4 +40,8 @@ editProfileProvider(String name, String about, Uint8List file) async {
     "profImage":photoUlr
     });
   }
+
+  // update  username and profile photos in comments also
+
+
 }

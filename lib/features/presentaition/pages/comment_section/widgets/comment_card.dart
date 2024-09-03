@@ -47,7 +47,8 @@ class _CommentCardState extends State<CommentCard> {
                               color: Theme.of(context).colorScheme.secondary)),
                       TextSpan(
                           text: '  ${widget.snap['text']}',
-                          style: const TextStyle(color: blackClr))
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.secondary))
                     ]),
                   ),
                   Padding(

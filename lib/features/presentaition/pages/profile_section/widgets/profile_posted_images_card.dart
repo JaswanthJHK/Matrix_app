@@ -164,9 +164,9 @@ class _PostCardState extends State<ProfilePostedCard> {
                           isLikeAnimating = false;
                         });
                       },
-                      child:  const Icon(
+                      child:   Icon(
                         Icons.favorite,
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.secondary ,
                         size: 110,
                       ),
                     ),
