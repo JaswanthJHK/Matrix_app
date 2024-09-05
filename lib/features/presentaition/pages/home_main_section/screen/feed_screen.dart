@@ -21,6 +21,7 @@ class _FeedScreenState extends State<FeedScreen>
   // here we also added the refreshUser
   Future<void> addData() async {
     UserProvider _userProvider = Provider.of(context, listen: false);
+    
     await _userProvider.refreshUser();
   }
 

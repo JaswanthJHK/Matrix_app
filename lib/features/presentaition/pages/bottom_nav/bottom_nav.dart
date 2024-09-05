@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:matrix_app_project/core/usecases/colors.dart';
 import 'package:matrix_app_project/features/presentaition/pages/add_post_section/screen/add_post_page.dart';
 import 'package:matrix_app_project/features/presentaition/pages/home_main_section/screen/feed_screen.dart';
 import 'package:matrix_app_project/features/presentaition/pages/chat_section/screen/message.dart';
@@ -75,9 +74,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
             ),
           ],
           selectedIndex: _selectedIndex,
-          onTabChange: (Index) {
+          onTabChange: (index) {
             setState(() {
-              _selectedIndex = Index;
+              _selectedIndex = index;
             });
           },
         ),
