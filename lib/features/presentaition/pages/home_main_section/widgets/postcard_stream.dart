@@ -49,7 +49,6 @@ import 'package:matrix_app_project/features/presentaition/pages/home_main_sectio
 //   }
 // }
 
-
 class PostCardStream extends StatefulWidget {
   const PostCardStream({super.key});
 
@@ -57,7 +56,8 @@ class PostCardStream extends StatefulWidget {
   State<PostCardStream> createState() => _PostCardStreamState();
 }
 
-class _PostCardStreamState extends State<PostCardStream> with AutomaticKeepAliveClientMixin {
+class _PostCardStreamState extends State<PostCardStream>
+    with AutomaticKeepAliveClientMixin {
   List<Map<String, dynamic>>? postData;
   bool isLoading = false;
   String? errorMessage;
@@ -65,7 +65,7 @@ class _PostCardStreamState extends State<PostCardStream> with AutomaticKeepAlive
   @override
   void initState() {
     super.initState();
-    // If postData is null, we fetch data from the StreamBuilder... 
+    // If postData is null, we fetch data from the StreamBuilder...
     if (postData == null) {
       fetchData();
     }
@@ -112,6 +112,8 @@ class _PostCardStreamState extends State<PostCardStream> with AutomaticKeepAlive
     return postData == null
         ? const Center(child: CircularProgressIndicator())
         : ListView.builder(
+            physics: const BouncingScrollPhysics(),
+            shrinkWrap: true,
             itemCount: postData?.length ?? 0,
             itemBuilder: (context, index) {
               final data = postData![index];
@@ -119,7 +121,7 @@ class _PostCardStreamState extends State<PostCardStream> with AutomaticKeepAlive
             },
           );
   }
-  
+
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;

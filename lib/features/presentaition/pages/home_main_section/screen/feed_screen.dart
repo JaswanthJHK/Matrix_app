@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:matrix_app_project/core/usecases/constants.dart';
 import 'package:matrix_app_project/features/presentaition/pages/home_main_section/widgets/postcard_stream.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/user_provider.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +22,7 @@ class _FeedScreenState extends State<FeedScreen>
   // here we also added the refreshUser
   Future<void> addData() async {
     UserProvider _userProvider = Provider.of(context, listen: false);
-    
+
     await _userProvider.refreshUser();
   }
 
@@ -39,18 +40,16 @@ class _FeedScreenState extends State<FeedScreen>
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
+            toolbarHeight: 50,
             backgroundColor: Theme.of(context).colorScheme.primary,
             floating: true,
             snap: true,
-            title: Padding(
-              padding: const EdgeInsets.only(left: 30),
-              child: Text(
-                "MATRIX",
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.secondary,
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                ),
+            title: Text(
+              "MATRIX",
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.secondary,
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),

@@ -135,21 +135,34 @@ class _SearchScreenState extends State<SearchScreen>
                               if (loadingProgress == null) {
                                 return child;
                               } else {
-                                return Center(
-                                  child: RotationTransition(
-                                    turns: AlwaysStoppedAnimation(
-                                        loadingProgress.expectedTotalBytes !=
-                                                null
-                                            ? loadingProgress
-                                                    .cumulativeBytesLoaded /
-                                                (loadingProgress
-                                                        .expectedTotalBytes ??
-                                                    1)
-                                            : 0),
-                                    child: const CircularProgressIndicator(
-                                      color: greyLite,
+                                return Stack(
+                                  children: [
+                                    const Center(
+                                        child: CircleAvatar(
+                                      radius: 15,
+                                      child: Icon(
+                                        Icons.search,
+                                        size: 18,
+                                      ),
+                                    )),
+                                    Center(
+                                      child: RotationTransition(
+                                        turns: AlwaysStoppedAnimation(
+                                            loadingProgress
+                                                        .expectedTotalBytes !=
+                                                    null
+                                                ? loadingProgress
+                                                        .cumulativeBytesLoaded /
+                                                    (loadingProgress
+                                                            .expectedTotalBytes ??
+                                                        1)
+                                                : 0),
+                                        child: const CircularProgressIndicator(
+                                          color: greyLite,
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                  ],
                                 );
                               }
                             },
