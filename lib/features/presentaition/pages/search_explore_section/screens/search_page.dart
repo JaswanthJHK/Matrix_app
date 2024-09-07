@@ -19,39 +19,40 @@ class _SearchScreenState extends State<SearchScreen>
   Widget build(BuildContext context) {
     Provider.of<SearchProvider>(context, listen: false).getAllUser();
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.primaryFixed,
-          leading: const Padding(
-            padding: EdgeInsets.only(left: 20),
-            child: Icon(
-              Icons.search,
-              size: 35,
-            ),
-          ),
-          title: Padding(
-            padding: const EdgeInsets.only(right: 10, top: 10, bottom: 10),
-            child: TextFormField(
-              controller: Provider.of<SearchProvider>(context, listen: false)
-                  .searchController,
-              decoration: const InputDecoration(
-                  fillColor: Color.fromARGB(255, 225, 39, 39),
-                  labelText: 'Search here...',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(width: 0, color: Colors.white),
-                      borderRadius: BorderRadius.all(Radius.circular(20)))),
-              onChanged: (value) {
-                Provider.of<SearchProvider>(context, listen: false)
-                    .getSearchedList(value);
-              },
-            ),
+      backgroundColor: Theme.of(context).colorScheme.primary,
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primaryFixed,
+        leading: const Padding(
+          padding: EdgeInsets.only(left: 20),
+          child: Icon(
+            Icons.search,
+            size: 35,
           ),
         ),
-        body: //Provider.of<SearchProvider>(context, listen: false)
-            //     .searchedList
-            //     .isNotEmpty
-            // ?
-            Consumer<SearchProvider>(builder: (context, value, child) {
+        title: Padding(
+          padding: const EdgeInsets.only(right: 10, top: 10, bottom: 10),
+          child: TextFormField(
+            controller: Provider.of<SearchProvider>(context, listen: false)
+                .searchController,
+            decoration: const InputDecoration(
+                fillColor: Color.fromARGB(255, 193, 33, 33),
+                labelText: 'Search here...',
+                border: OutlineInputBorder(
+                    borderSide: BorderSide(width: 0, color: Colors.white),
+                    borderRadius: BorderRadius.all(Radius.circular(20)))),
+            onChanged: (value) {
+              Provider.of<SearchProvider>(context, listen: false)
+                  .getSearchedList(value);
+            },
+          ),
+        ),
+      ),
+      body: //Provider.of<SearchProvider>(context, listen: false)
+          //     .searchedList
+          //     .isNotEmpty
+          // ?
+          Consumer<SearchProvider>(
+        builder: (context, value, child) {
           // return FutureBuilder(
           //     future: FirebaseFirestore.instance
           //         .collection('users')
@@ -78,11 +79,12 @@ class _SearchScreenState extends State<SearchScreen>
                 return InkWell(
                   onTap: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              ProfilPage(uid: value.searchedList[index].uid),
-                        ));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            ProfilPage(uid: value.searchedList[index].uid),
+                      ),
+                    );
                   },
                   child: ListTile(
                     leading: CircleAvatar(
@@ -175,7 +177,9 @@ class _SearchScreenState extends State<SearchScreen>
               },
             );
           }
-        }));
+        },
+      ),
+    );
   }
 
   @override

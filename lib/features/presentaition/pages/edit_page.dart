@@ -62,7 +62,7 @@ class EditPostPage extends StatelessWidget {
                       builder: (context) => const BottomNavBar(),
                     ));
               },
-              text: 'Upload',
+              text: 'Upload!',
               size: 65,
             ),
           ],
