@@ -29,32 +29,40 @@ class _FeedScreenState extends State<FeedScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primary,
-      // appBar:const CostumAppBarWidget(
-      //   title: 'MATRIX',
-      //   titleAlign: false,
-      //   leading: Image(image: AssetImage('asset/images/Main_logo.png')),
-      // ),
-      // body:const PostCardStream(),
-      body: NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          SliverAppBar(
-            toolbarHeight: 50,
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            floating: true,
-            snap: true,
-            title: Text(
-              "MATRIX",
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.secondary,
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+
+        // appBar:const CostumAppBarWidget(
+        //   title: 'MATRIX',
+        //   titleAlign: false,
+        //   leading: Image(image: AssetImage('asset/images/Main_logo.png')),
+        // ),
+        // body:const PostCardStream(),
+        body: MediaQuery.removePadding(
+          context: context,
+          removeBottom: true,
+          removeTop: true,
+          child: NestedScrollView(
+            headerSliverBuilder: (context, innerBoxIsScrolled) => [
+              SliverAppBar(
+                toolbarHeight: 60,
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                floating: true,
+                snap: true,
+                title: Text(
+                  "MATRIX",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.secondary,
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-            ),
+            ],
+            body: const PostCardStream(),
           ),
-        ],
-        body: const PostCardStream(),
+        ),
       ),
     );
   }
