@@ -40,6 +40,7 @@ class _PostCardState extends State<PostCard>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final model.User? user = Provider.of<UserProvider>(context).getUser;
 
     return Container(

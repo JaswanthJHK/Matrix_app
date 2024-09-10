@@ -49,12 +49,8 @@ class MyNormalButton extends StatelessWidget {
   final String text;
   final double size;
 
-  const MyNormalButton({
-    super.key,
-    required this.onTap,
-    required this.text,
-    required this.size
-  });
+  const MyNormalButton(
+      {super.key, required this.onTap, required this.text, required this.size});
 
   @override
   Widget build(BuildContext context) {
@@ -92,17 +88,14 @@ class MyNormalButton extends StatelessWidget {
     );
   }
 }
+
 class EditProfileButton extends StatelessWidget {
   final Function onTap;
   final String text;
   final double size;
 
-  const EditProfileButton({
-    super.key,
-    required this.onTap,
-    required this.text,
-    required this.size
-  });
+  const EditProfileButton(
+      {super.key, required this.onTap, required this.text, required this.size});
 
   @override
   Widget build(BuildContext context) {
@@ -118,13 +111,13 @@ class EditProfileButton extends StatelessWidget {
             onTap();
           },
           style: ButtonStyle(
-              backgroundColor: MaterialStateColor.resolveWith((states) {
-                if (states.contains(MaterialState.pressed)) {
+              backgroundColor: WidgetStateColor.resolveWith((states) {
+                if (states.contains(WidgetState.pressed)) {
                   return scffoldBackgroundClr;
                 }
-                return blackClr;
+                return Theme.of(context).colorScheme.inversePrimary;
               }),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8)))),
           child: Text(

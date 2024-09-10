@@ -5,6 +5,7 @@ ThemeData lightMode = ThemeData(
     primary: Color.fromARGB(255, 224, 224, 224),
     primaryFixed: Color.fromARGB(255, 222, 222, 222),
     primaryContainer:Color.fromARGB(255, 143, 143, 143) ,
+    inversePrimary: Colors.blue,
     secondary: Color.fromARGB(255, 18, 18, 18)
   ),
 );
