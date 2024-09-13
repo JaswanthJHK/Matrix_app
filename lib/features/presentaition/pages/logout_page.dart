@@ -48,7 +48,7 @@ class _HomeScreenState extends State<LogOutPage> {
                           );
                   
                 },
-                child: const Text("Logout")),
+                child: const Text("Logout.")),
           ],
         ),
       ),
