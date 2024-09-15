@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "760236139331",
+    "project_id": "matrixsocialmediaproject",
+    "storage_bucket": "matrixsocialmediaproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760236139331:android:f08ac61fb9c59b8ace05f6",
+        "android_client_info": {
+          "package_name": "com.example.matrix_app_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2yeMCzO9qdX2-m3VpyOofd1saKkNj75E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
