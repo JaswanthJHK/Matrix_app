@@ -29,7 +29,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
   var proUserData = {};
 
   void selectImage() async {
-    Uint8List im = await pickImage(ImageSource.gallery);
+    Uint8List im = await pickImage(ImageSource.gallery,context);  // pick image function is working hereeeee-----------------
     setState(() {
       _image = im;
     });

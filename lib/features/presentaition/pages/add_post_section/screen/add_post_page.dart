@@ -53,7 +53,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
               child: const Text("Take a photo"),
               onPressed: () async {
                 Navigator.of(context).pop();
-                Uint8List file = await pickImage(ImageSource.camera);
+                Uint8List file = await pickImage(ImageSource.camera,context);
                 setState(() {
                   _file = file;
                 });
@@ -64,7 +64,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
               child: const Text("Choos from Gallery"),
               onPressed: () async {
                 Navigator.of(context).pop();
-                Uint8List file = await pickImage(ImageSource.gallery);
+                Uint8List file = await pickImage(ImageSource.gallery,context);
                 setState(() {
                   _file = file;
                 });
@@ -107,7 +107,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
             appBar: const CostumAppBarWidget(
               title: 'Add your post',
               titleAlign: false,
-              leading: Image(image: AssetImage('asset/images/Main_logo.png')),
+              //  leading: Image(image: AssetImage('asset/images/Main_logo.png')),
             ),
             body: SingleChildScrollView(
               child: Column(
@@ -129,7 +129,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
             appBar: const CostumAppBarWidget(
               title: 'Add your post',
               titleAlign: false,
-              leading: Image(image: AssetImage('asset/images/Main_logo.png')),
+              //  leading: Image(image: AssetImage('asset/images/Main_logo.png')),
             ),
             body: SingleChildScrollView(
               child: Column(

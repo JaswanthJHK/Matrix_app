@@ -22,7 +22,7 @@ class _SignInPageState extends State<SignInPage> {
   Uint8List? _image;
 
   void selectImage() async {
-    Uint8List im = await pickImage(ImageSource.gallery);
+    Uint8List im = await pickImage(ImageSource.gallery,context);// pick image function is working
     setState(() {
       _image = im;
     });
