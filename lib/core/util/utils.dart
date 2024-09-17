@@ -40,5 +40,6 @@ showSnackBarMethod(String content, BuildContext context) {
 //           CropAspectRatioPreset.ratio16x9,
 //         ])
 //   ]);
+//
 //   return croppedFile!;
 // }

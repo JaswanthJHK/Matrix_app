@@ -28,7 +28,7 @@ class AddPostScreeShowImage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            "Add Image",
+            "Add Image here",
             style: TextStyle(
                 color: Colors.grey[500],
                 fontSize: 18,
