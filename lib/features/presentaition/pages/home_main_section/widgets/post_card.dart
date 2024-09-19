@@ -42,6 +42,7 @@ class _PostCardState extends State<PostCard>
   Widget build(BuildContext context) {
     super.build(context);
     final model.User? user = Provider.of<UserProvider>(context).getUser;
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
@@ -144,7 +145,9 @@ class _PostCardState extends State<PostCard>
                       children: [
                         Center(
                           child: Image.asset(
-                            'asset/images/fadeinImage.png',
+                            isDarkMode?
+                            'asset/images/loading_image.png':
+                            'asset/images/loading_image.light.png',
                             fit: BoxFit.cover,
                           ),
                         ),

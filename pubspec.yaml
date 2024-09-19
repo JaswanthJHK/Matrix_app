@@ -70,6 +70,8 @@ flutter:
     - asset/images/Main_logo.png
     - asset/images/cover_image.png
     - asset/images/fadeinImage.png
+    - asset/images/loading_image.png
+    - asset/images/loading_image.light.png
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
