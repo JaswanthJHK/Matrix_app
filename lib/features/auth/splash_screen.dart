@@ -21,11 +21,11 @@ class _SpalshScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     splashFuntion(context);
     return Scaffold(
-      backgroundColor: scffoldBackgroundClr,
+      backgroundColor: Theme.of(context).colorScheme.primary,
       body: Center(
         child: Image.asset(
-          'asset/images/Main_logo.png',
-          height: 150,
+          'asset/images/Main_logo_final.png',
+          height: 190,
         ),
       ),
     );
