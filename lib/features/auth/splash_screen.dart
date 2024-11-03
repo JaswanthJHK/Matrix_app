@@ -25,7 +25,7 @@ class _SpalshScreenState extends State<SplashScreen> {
       body: Center(
         child: Image.asset(
           'asset/images/Main_logo_final.png',
-          height: 190,
+          height: 180,
         ),
       ),
     );

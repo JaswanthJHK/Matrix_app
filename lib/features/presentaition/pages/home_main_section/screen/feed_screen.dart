@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:matrix_app_project/core/usecases/constants.dart';
 import 'package:matrix_app_project/features/presentaition/pages/home_main_section/widgets/postcard_stream.dart';
 import 'package:matrix_app_project/features/presentaition/statemanagement/provider/user_provider.dart';
+import 'package:matrix_app_project/features/presentaition/widgets/global/custom_text.dart';
 import 'package:provider/provider.dart';
 
 class FeedScreen extends StatefulWidget {
@@ -50,14 +50,20 @@ class _FeedScreenState extends State<FeedScreen>
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 floating: true,
                 snap: true,
-                title: Text(
-                  "MATRIX",
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.secondary,
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                  ),
+                title: CustomText(
+                  text: "MATRIX",
+                  color: Theme.of(context).colorScheme.secondary,
+                  fontsize: 28,
+                  fontweight: FontWeight.bold,
                 ),
+                //  Text(
+                //   "MATRIX",
+                //   style: TextStyle(
+                //     color: Theme.of(context).colorScheme.secondary,
+                //     fontSize: 29.sp,
+                //     fontWeight: FontWeight.bold,
+                //   ),
+                // ),
               ),
             ],
             body: const PostCardStream(),

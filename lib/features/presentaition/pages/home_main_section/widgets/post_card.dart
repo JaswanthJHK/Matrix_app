@@ -132,6 +132,11 @@ class _PostCardState extends State<PostCard>
                 );
                 setState(() {
                   isLikeAnimating = true;
+                    if (widget.snap['likes'].contains(user.uid)) {
+                  widget.snap['likes'].remove(user.uid);
+                } else {
+                  widget.snap['likes'].add(user.uid);
+                }
                 });
               },
               child: Stack(
@@ -145,9 +150,9 @@ class _PostCardState extends State<PostCard>
                       children: [
                         Center(
                           child: Image.asset(
-                            isDarkMode?
-                            'asset/images/loading_image.png':
-                            'asset/images/loading_image.light.png',
+                            isDarkMode
+                                ? 'asset/images/loading_image.png'
+                                : 'asset/images/loading_image.light.png',
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -177,7 +182,7 @@ class _PostCardState extends State<PostCard>
                       child: const Icon(
                         Icons.favorite,
                         color: Colors.white,
-                        size: 110,
+                        size: 100,
                       ),
                     ),
                   )

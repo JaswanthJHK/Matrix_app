@@ -23,8 +23,10 @@ void main() async {
   await Firebase.initializeApp();
   await FirebaseMessaging.instance.getInitialMessage();
   FirebaseMessaging.onBackgroundMessage(_backgroundMessageHandler);
-  runApp(ChangeNotifierProvider(create: (context) => ThemeProvider(),
-  child:const MyApp(),));
+  runApp(ChangeNotifierProvider(
+    create: (context) => ThemeProvider(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -72,13 +74,13 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => EditProfileProvider(),
         ),
-       
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-         theme: Provider.of<ThemeProvider>(context).themeData,
-        home: const SplashScreen(),
-      ),
+      child:  MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: Provider.of<ThemeProvider>(context).themeData,
+            home: const SplashScreen(),
+          ),
+      
     );
   }
 }
