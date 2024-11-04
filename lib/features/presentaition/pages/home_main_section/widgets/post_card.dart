@@ -130,7 +130,7 @@ class _PostCardState extends State<PostCard>
                   user!.uid,
                   widget.snap?['likes'],
                 );
-                setState(() {
+                    setState(() {
                   isLikeAnimating = true;
                     if (widget.snap['likes'].contains(user.uid)) {
                   widget.snap['likes'].remove(user.uid);
